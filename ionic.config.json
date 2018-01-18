@@ -1,0 +1,8 @@
+{
+  "name": "nls-ionic3-flipcards",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
