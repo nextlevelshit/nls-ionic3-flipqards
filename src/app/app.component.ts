@@ -42,7 +42,7 @@ export class MyApp {
 
       await createConnection({
         type: 'cordova',
-        database: 'nlsFlipcards',
+        database: 'nlsFlipCards',
         location: 'default',
         logging: ['error', 'query', 'schema'],
         synchronize: true,

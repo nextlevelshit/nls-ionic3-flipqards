@@ -1,0 +1,10 @@
+{
+  "type": "cordova",
+  "database": "nlsFlipCards",
+  "location": "default",
+  "logging": ["error", "query", "schema"],
+  "synchronize": true,
+  "entities": [
+    "src/entities/**/*.ts"
+  ]
+}
