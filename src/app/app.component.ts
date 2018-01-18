@@ -40,48 +40,17 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
-      let connection;
+      await createConnection({
+        type: 'cordova',
+        database: 'nlsFlipcards',
+        location: 'default',
+        logging: ['error', 'query', 'schema'],
+        synchronize: true,
+        entities: [
+          Category
+        ]
+      });
 
-      // if (window.cordova) {
-        // running on device/emulator
-        connection = await createConnection({
-          type: 'cordova',
-          database: 'test',
-          location: 'default',
-          logging: ['error', 'query', 'schema'],
-          synchronize: true,
-          entities: [
-            Category
-          ]
-        });
-      // } else {
-      //   // running in dev mode
-      //   connection = await createConnection({
-      //     type: 'websql',
-      //     database: 'testing',
-      //     version: '1',
-      //     description: 'test database',
-      //     size: 2 * 1024 * 1024,
-      //     entities: [
-      //       Category
-      //     ],
-      //     logging: true,
-      //     synchronize: true
-      //   });
-      // }
-
-      // await createConnection({
-      //   type: 'cordova',
-      //   database: 'test',
-      //   location: 'default',
-      //   logging: ['error', 'query', 'schema'],
-      //   synchronize: true,
-      //   entities: [
-      //     // Author,
-      //     // Category,
-      //     // Post
-      //   ]
-      // });
     });
   }
 
