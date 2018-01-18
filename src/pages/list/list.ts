@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { getRepository, Repository } from 'typeorm';
+import { NavController } from 'ionic-angular';
+// import { getRepository, Repository } from 'typeorm';
 
 import { Category } from './../../entities/category';
 
@@ -9,16 +9,11 @@ import { Category } from './../../entities/category';
   templateUrl: 'list.html'
 })
 export class ListPage {
-  private loadedCategories: boolean = false;
-  private loadedCategory: Category = null;
-
-  selectedItem: any;
-  categories: Category[];
+  loadedCategories: Category[];
   sampleCategories: Array<string> = ['Geschichte im Überblick', 'Philosophie'];
-  sampleCategory: string = 'Geschichte im Überblick';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.selectedItem = navParams.get('item');
+  constructor(public navCtrl: NavController) {
+
   }
 
   ionViewDidLoad() {
@@ -26,20 +21,16 @@ export class ListPage {
   }
 
   async runDemo() {
+    const category = new Category();
+    category.name = 'Geschichte';
+    category.save();
 
-    // this.sampleCategories.forEach(name => {
-      let newCategory = new Category();
-      newCategory.name = this.sampleCategory;
-      // newCategory.name = name;
-    // });
+    this.loadedCategories = await Category.find();
 
-    const categoryRepository = getRepository('category') as Repository<Category>;
-    await categoryRepository.save(newCategory);
+    console.log(this.loadedCategories);
+  }
 
-    console.log('Category has been saved');
-
-    const loadedCatgory = await categoryRepository.createQueryBuilder('category')
-      .where('category.id = :id', {id: newCategory.id})
-      .getOne();
+  categoryTapped(e, name): void {
+    console.log(`Clicked on ${name}`);
   }
 }
