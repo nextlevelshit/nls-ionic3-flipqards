@@ -6,11 +6,13 @@
 *.log
 *.tmp
 *.tmp.*
+*.db
 log.txt
 *.sublime-project
 *.sublime-workspace
 .vscode/
 npm-debug.log*
+ormconfig.json
 
 .idea/
 .sourcemaps/

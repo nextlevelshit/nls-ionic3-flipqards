@@ -1,9 +1,11 @@
 {
-  "type": "cordova",
-  "database": "nlsFlipCards",
+  "type": "mysql",
+  "database": "",
   "location": "default",
   "logging": ["error", "query", "schema"],
   "synchronize": true,
+  "user": "",
+  "password": "",
   "entities": [
     "src/entities/**/*.ts"
   ]

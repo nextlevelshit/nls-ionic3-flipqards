@@ -56,16 +56,7 @@ export class MyApp {
       } else {
         console.log('sqlite');
 
-        await createConnection({
-          type: 'sqlite',
-          database: './database.db',
-          logging: ['error', 'query', 'schema'],
-          synchronize: true,
-          entities: [
-            Category
-          ],
-          dropSchema: true
-        });
+        await createConnection();
       }
     });
   }
