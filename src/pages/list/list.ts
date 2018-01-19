@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-// import { getRepository, Repository } from 'typeorm';
 
 import { Category } from './../../entities/category';
 
@@ -21,13 +20,18 @@ export class ListPage {
   }
 
   async runDemo() {
+
     const category = new Category();
     category.name = 'Geschichte';
     category.save();
 
-    this.loadedCategories = await Category.find();
+    await Category.find().then((r) => {
+      console.error(r);
+    }, (e) => {
+      console.error(e);
+    });
 
-    console.log(this.loadedCategories);
+    // console.warn(this.loadedCategories);
   }
 
   categoryTapped(e, name): void {

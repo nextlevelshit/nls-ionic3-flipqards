@@ -27,30 +27,46 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
+      { title: 'Lernen', component: HomePage },
       { title: 'List', component: ListPage }
     ];
 
   }
 
   initializeApp() {
+
     this.platform.ready().then(async () => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
-      await createConnection({
-        type: 'cordova',
-        database: 'nlsFlipCards',
-        location: 'default',
-        logging: ['error', 'query', 'schema'],
-        synchronize: true,
-        entities: [
-          Category
-        ]
-      });
+      if(this.platform.is('cordova')) {
+        await createConnection({
+          type: 'cordova',
+          database: 'nlsFlipCards',
+          location: 'default',
+          logging: ['error', 'query', 'schema'],
+          synchronize: true,
+          entities: [
+            Category
+          ],
+          dropSchema: true
+        });
+      } else {
+        console.log('sqlite');
 
+        await createConnection({
+          type: 'sqlite',
+          database: './database.db',
+          logging: ['error', 'query', 'schema'],
+          synchronize: true,
+          entities: [
+            Category
+          ],
+          dropSchema: true
+        });
+      }
     });
   }
 
