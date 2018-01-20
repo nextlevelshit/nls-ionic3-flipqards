@@ -8,8 +8,8 @@ import { Category } from './../../entities/category';
   templateUrl: 'list.html'
 })
 export class ListPage {
-  loadedCategories: Category[];
-  sampleCategories: Array<string> = ['Geschichte im Überblick', 'Philosophie'];
+  categories: Category[];
+  count: number;
 
   constructor(public navCtrl: NavController) {
 
@@ -20,14 +20,14 @@ export class ListPage {
   }
 
   async runDemo() {
-    await Category.find().then((res) => {
-      this.loadedCategories = res;
-    }, (err) => {
-      console.error(err);
-    });
+    this.categories = await Category.all();
   }
 
-  categoryTapped(e, name): void {
-    console.log(`Clicked on ${name}`);
+  categorySelected(e, name): void {
+    alert(`Clicked on ${name}`);
+  }
+
+  addCategory(e) {
+    alert(`Adding new category`);
   }
 }

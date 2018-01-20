@@ -3,14 +3,15 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>List</ion-title>
+    <ion-title>Kategorien</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor="let category of loadedCategories" (click)="categoryTapped($event, category.name)">
+    <button ion-item *ngFor="let category of categories" (click)="selecategorySelectedctCategory($event, category.id)">
       {{category.name}}
     </button>
   </ion-list>
+  <button ion-button full (click)="addCategory($event)">Neue Kategorie hinzufügen</button>
 </ion-content>
