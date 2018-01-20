@@ -9,6 +9,11 @@ export class Category extends BaseEntity {
     @Column()
     name: string;
 
+    constructor (name) {
+      super();
+      this.name = name;
+    }
+
     static findByName(firstName: string, lastName: string) {
       return this.createQueryBuilder('category')
           .where('category.name = :name', { firstName })

@@ -20,18 +20,11 @@ export class ListPage {
   }
 
   async runDemo() {
-
-    const category = new Category();
-    category.name = 'Geschichte';
-    category.save();
-
-    await Category.find().then((r) => {
-      console.error(r);
-    }, (e) => {
-      console.error(e);
+    await Category.find().then((res) => {
+      this.loadedCategories = res;
+    }, (err) => {
+      console.error(err);
     });
-
-    // console.warn(this.loadedCategories);
   }
 
   categoryTapped(e, name): void {

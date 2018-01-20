@@ -4,9 +4,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { createConnection } from 'typeorm'
 
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
-import { Category } from '../entities/category';
+import { HomePage } from './../pages/home/home';
+import { ListPage } from './../pages/list/list';
+import { Category } from './../entities/category';
 
 @Component({
   templateUrl: 'app.html'
@@ -44,19 +44,34 @@ export class MyApp {
       if(this.platform.is('cordova')) {
         await createConnection({
           type: 'cordova',
-          database: 'nlsFlipCards',
           location: 'default',
-          logging: ['error', 'query', 'schema'],
+          database: 'nls-flipcards',
+          description: 'Production Database for NLS Flipcards',
+          logging: true,
+          synchronize: true,
+          entities: [
+            Category
+          ],
+          dropSchema: true
+        }).then((connection) => {
+          ['Türkisch', 'Geschichte', 'Coding'].forEach(item => {
+            new Category(item).save();
+          });
+        });
+      } else {
+        await createConnection({
+          type: 'websql',
+          database: 'nls-flipcards',
+          description: 'Development Database for NLS Flipcards',
+          version: '1',
+          size: 2097152,
+          logging: true,
           synchronize: true,
           entities: [
             Category
           ],
           dropSchema: true
         });
-      } else {
-        console.log('sqlite');
-
-        await createConnection();
       }
     });
   }
