@@ -71,6 +71,9 @@ export class MyApp {
             Category
           ],
           dropSchema: true
+        }).then(connection => {
+          console.log(connection);
+          this.openPage(ListPage);
         });
       }
     });

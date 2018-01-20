@@ -19,9 +19,13 @@ export class Category extends BaseEntity {
       .getMany();
   }
 
-  static findByName(firstName: string, lastName: string) {
+  static findByName(name: string) {
     return this.createQueryBuilder('category')
-        .where('category.name = :name', { firstName })
-        .getMany();
+        .where('category.name = :name', { name })
+        .getOne();
+  }
+
+  static isValid(name) {
+    return true;
   }
 }
