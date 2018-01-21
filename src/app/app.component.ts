@@ -58,7 +58,7 @@ export class MyApp {
         }).then((connection) => {
           ['Türkisch', 'Geschichte', 'Coding'].forEach(name => {
             new Category(name).save().then(category => {
-              ['Karte 1', 'Karte 2', 'Karte 3'].forEach(content => {
+              [`Karte 1 (${name})`, `Karte 2 (${name})`, `Karte 3 (${name})`].forEach(content => {
                 new Card(content, category).save();
               });
             });
