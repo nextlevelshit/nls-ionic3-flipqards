@@ -57,6 +57,7 @@ export class MyApp {
           ['Türkisch', 'Geschichte', 'Coding'].forEach(item => {
             new Category(item).save();
           });
+          // this.nav.push(ListPage);
         });
       } else {
         await createConnection({
@@ -71,9 +72,6 @@ export class MyApp {
             Category
           ],
           dropSchema: true
-        }).then(connection => {
-          console.log(connection);
-          this.openPage(ListPage);
         });
       }
     });

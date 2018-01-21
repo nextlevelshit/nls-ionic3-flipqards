@@ -5,6 +5,7 @@ import { NavController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 
 import { Category } from './../../entities/category';
+import { LearnPage } from './../learn/learn';
 
 @Component({
   selector: 'page-list',
@@ -32,11 +33,7 @@ export class ListPage {
 
   categorySelected(e, id) {
     Category.findOneById(id).then(category => {
-      this.toastCtrl.create({
-        message: `Clicked on ${category.name}`,
-        duration: 3000,
-        position: 'bottom'
-      }).present();
+      this.navCtrl.push(LearnPage, {category: category});
     });
   }
 
