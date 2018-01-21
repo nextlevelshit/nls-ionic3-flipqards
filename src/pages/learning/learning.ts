@@ -4,10 +4,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-learn',
-  templateUrl: 'learn.html',
+  selector: 'page-learning',
+  templateUrl: 'learning.html',
 })
-export class LearnPage {
+export class LearningPage {
   category: Category = this.navParams.get('category');
 
   constructor(

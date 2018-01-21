@@ -7,7 +7,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
-import { LearnPage } from './../pages/learn/learn';
+import { LearningPage } from './../pages/learning/learning';
 
 
 @NgModule({
@@ -15,7 +15,7 @@ import { LearnPage } from './../pages/learn/learn';
     MyApp,
     HomePage,
     ListPage,
-    LearnPage
+    LearningPage
   ],
   imports: [
     BrowserModule,
@@ -26,7 +26,7 @@ import { LearnPage } from './../pages/learn/learn';
     MyApp,
     HomePage,
     ListPage,
-    LearnPage
+    LearningPage
   ],
   providers: [
     StatusBar,

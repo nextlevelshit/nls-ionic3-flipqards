@@ -5,7 +5,7 @@ import { NavController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 
 import { Category } from './../../entities/category';
-import { LearnPage } from './../learn/learn';
+import { LearningPage } from './../learning/learning';
 
 @Component({
   selector: 'page-list',
@@ -33,7 +33,7 @@ export class ListPage {
 
   categorySelected(e, id) {
     Category.findOneById(id).then(category => {
-      this.navCtrl.push(LearnPage, {category: category});
+      this.navCtrl.push(LearningPage, {category: category});
     });
   }
 
