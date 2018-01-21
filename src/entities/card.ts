@@ -10,6 +10,15 @@ export class Card extends BaseEntity {
   @Column()
   content: string;
 
+  // @Column()
+  // displayed: number;
+
+  // @Column()
+  // correct: number;
+
+  // @Column()
+  // wrong: number;
+
   @ManyToOne(type => Category, category => category.cards)
   category: Category;
 
@@ -19,6 +28,6 @@ export class Card extends BaseEntity {
   ) {
     super();
     this.content = content;
-    this.category = category
+    this.category = category;
   }
 }

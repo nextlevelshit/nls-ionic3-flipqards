@@ -11,6 +11,7 @@ import { Card } from './../../entities/card';
 })
 export class LearningPage {
   category: Category = this.navParams.get('category');
+  cards: Card[];
 
   constructor(
     public navCtrl: NavController,
@@ -20,7 +21,7 @@ export class LearningPage {
   }
 
   ionViewDidLoad() {
-    console.log('Learn page loaded');
+    this.cards = this.category.cards;
   }
 
 }

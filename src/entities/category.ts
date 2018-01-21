@@ -1,4 +1,4 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinTable } from 'typeorm';
 
 import { Card } from './card';
 
@@ -10,8 +10,11 @@ export class Category extends BaseEntity {
   @Column()
   name: string;
 
-  @OneToMany(type => Card, card => card.category)
-  cards: Card[]
+  @OneToMany(type => Card, card => card.category, {
+    eager: true
+  })
+  @JoinTable()
+  cards: Card[];
 
   constructor (name) {
     super();

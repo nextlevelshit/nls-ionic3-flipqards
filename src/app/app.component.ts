@@ -56,10 +56,18 @@ export class MyApp {
           ],
           dropSchema: true
         }).then((connection) => {
-          ['Türkisch', 'Geschichte', 'Coding'].forEach(item => {
-            new Category(item).save();
+          ['Türkisch', 'Geschichte', 'Coding'].forEach(name => {
+            new Category(name).save().then(category => {
+              console.log(`added ${name}`);
+              ['Karte 1', 'Karte 2', 'Karte 3'].forEach(content => {
+                console.log(`adding ${content}`, category);
+                new Card(content, category).save().then(card => {
+                  console.log(card);
+                });
+              });
+            });
           });
-          // this.nav.push(ListPage);
+          // this.nav.setRoot(ListPage);
         });
       } else {
         await createConnection({
