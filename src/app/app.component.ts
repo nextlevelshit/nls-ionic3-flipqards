@@ -7,6 +7,7 @@ import { createConnection } from 'typeorm'
 import { HomePage } from './../pages/home/home';
 import { ListPage } from './../pages/list/list';
 import { Category } from './../entities/category';
+import { Card } from './../entities/card';
 
 @Component({
   templateUrl: 'app.html'
@@ -50,7 +51,8 @@ export class MyApp {
           logging: true,
           synchronize: true,
           entities: [
-            Category
+            Category,
+            Card
           ],
           dropSchema: true
         }).then((connection) => {
@@ -69,7 +71,8 @@ export class MyApp {
           logging: true,
           synchronize: true,
           entities: [
-            Category
+            Category,
+            Card
           ],
           dropSchema: true
         });
