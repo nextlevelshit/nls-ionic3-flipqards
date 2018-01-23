@@ -26,13 +26,5 @@ export class LearningPage {
         console.log(card);
       });
     });
-    console.log(this.category.cards);
-    // this.findCards();
   }
-
-  async findCards() {
-    console.log();
-    this.cards = await this.category.cards;
-  }
-
 }

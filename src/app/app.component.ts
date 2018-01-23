@@ -58,14 +58,8 @@ export class MyApp {
         }).then((connection) => {
           ['Türkisch', 'Geschichte', 'Coding'].forEach(name => {
             new Category(name).save().then(category => {
-              [`Karte 1 (${name})`, `Karte 2 (${name})`, `Karte 3 (${name})`].forEach(content => {
-                new Card(content, category).save();
-                // new Card(`Rückseite: ${content}`, category).save().then(link => {
-                //   // new Card(content, category, link).save().then(card => {
-                //   //   // link.link = card;
-                //   //   // link.save();
-                //   // });
-                // });
+              [`Vorderseite 1 (${name})`, `Vorderseite 2 (${name})`, `Vorderseite 3 (${name})`].forEach(content => {
+                new Card(content, 'Rückseite', category).save();
               });
             });
           });

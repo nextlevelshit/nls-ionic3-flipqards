@@ -8,37 +8,32 @@ export class Card extends BaseEntity {
   id: number;
 
   @Column()
-  content: string;
+  front: string;
 
-  // @Column('int')
-  // count: number;
+  @Column()
+  back: string;
 
-  // @Column('int')
-  // correct: number;
+  @Column({nullable: true, default: 0})
+  count: number;
 
-  // @Column('int')
-  // wrong: number;
+  @Column({nullable: true, default: 0})
+  correct: number;
+
+  @Column({nullable: true, default: 0})
+  wrong: number;
 
   @ManyToOne(type => Category, category => category.cards)
   @JoinColumn()
   category: Category;
 
-  // @OneToOne(type => Card, { eager: true })
-  // @JoinColumn()
-  // link: Card;
-
   constructor (
-    content: string,
-    category: Category,
-    link?: Card
-  ) {  // @OneToOne(type => Card, { eager: true })
-  // @JoinColumn()
-  // link: Card;
+    front: string,
+    back: string,
+    category: Category
+  ) {
     super();
-    this.content = content;
+    this.front = front;
+    this.back = back;
     this.category = category;
-    // this.link = link ? link : null
-
-    // console.log('adding card', content, category);
   }
 }

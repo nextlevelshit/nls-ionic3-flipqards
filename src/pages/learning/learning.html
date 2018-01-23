@@ -10,7 +10,7 @@
 <ion-content padding>
   <ion-list *ngIf="category.cards?.length > 0">
     <ion-item *ngFor="let card of category.cards">
-      {{card.content}} «» Rückseite
+      {{card.front}} «» {{card.back}}
     </ion-item>
   </ion-list>
   <ion-title *ngIf="!category.cards">
