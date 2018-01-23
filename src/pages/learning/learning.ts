@@ -23,8 +23,13 @@ export class LearningPage {
   ionViewDidLoad() {
     Card.find().then(cards => {
       cards.forEach((card) => {
-        console.log(card);
+        console.log(card.front, card.views());
       });
     });
+  }
+
+  public increaseCorrect(card: Card) {
+    card.correct += 1;
+    card.save();
   }
 }

@@ -7,7 +7,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <ion-list>
     <button ion-item *ngFor="let category of categories" (click)="categorySelected($event, category.id)">
       {{category.name}}

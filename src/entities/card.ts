@@ -14,9 +14,6 @@ export class Card extends BaseEntity {
   back: string;
 
   @Column({nullable: true, default: 0})
-  count: number;
-
-  @Column({nullable: true, default: 0})
   correct: number;
 
   @Column({nullable: true, default: 0})
@@ -35,5 +32,9 @@ export class Card extends BaseEntity {
     this.front = front;
     this.back = back;
     this.category = category;
+  }
+
+  public views() {
+    return this.correct + this.wrong;
   }
 }

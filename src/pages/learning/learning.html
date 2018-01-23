@@ -9,9 +9,9 @@
 
 <ion-content padding>
   <ion-list *ngIf="category.cards?.length > 0">
-    <ion-item *ngFor="let card of category.cards">
-      {{card.front}} «» {{card.back}}
-    </ion-item>
+    <button ion-item *ngFor="let card of category.cards" (click)="increaseCorrect(card)">
+      {{card.front}} «» {{card.back}} [{{card.correct}}/{{card.wrong}}]
+    </button>
   </ion-list>
   <ion-title *ngIf="!category.cards">
     Inhalte werden geladen ...
