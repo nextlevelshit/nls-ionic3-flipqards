@@ -21,7 +21,18 @@ export class LearningPage {
   }
 
   ionViewDidLoad() {
-    this.cards = this.category.cards;
+    Card.find().then(cards => {
+      cards.forEach((card) => {
+        console.log(card);
+      });
+    });
+    console.log(this.category.cards);
+    // this.findCards();
+  }
+
+  async findCards() {
+    console.log();
+    this.cards = await this.category.cards;
   }
 
 }

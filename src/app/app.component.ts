@@ -48,7 +48,7 @@ export class MyApp {
           location: 'default',
           database: 'nls-flipcards',
           description: 'Production Database for NLS Flipcards',
-          logging: true,
+          logging: false,
           synchronize: true,
           entities: [
             Category,
@@ -60,6 +60,12 @@ export class MyApp {
             new Category(name).save().then(category => {
               [`Karte 1 (${name})`, `Karte 2 (${name})`, `Karte 3 (${name})`].forEach(content => {
                 new Card(content, category).save();
+                // new Card(`Rückseite: ${content}`, category).save().then(link => {
+                //   // new Card(content, category, link).save().then(card => {
+                //   //   // link.link = card;
+                //   //   // link.save();
+                //   // });
+                // });
               });
             });
           });

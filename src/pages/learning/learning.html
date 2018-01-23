@@ -8,9 +8,12 @@
 
 
 <ion-content padding>
-  <ion-list>
-    <ion-item *ngFor="let card of cards">
-      {{card.content}}
+  <ion-list *ngIf="category.cards?.length > 0">
+    <ion-item *ngFor="let card of category.cards">
+      {{card.content}} «» Rückseite
     </ion-item>
   </ion-list>
+  <ion-title *ngIf="!category.cards">
+    Inhalte werden geladen ...
+  </ion-title>
 </ion-content>

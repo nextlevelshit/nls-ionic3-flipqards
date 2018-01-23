@@ -10,9 +10,7 @@ export class Category extends BaseEntity {
   @Column()
   name: string;
 
-  @OneToMany(type => Card, card => card.category, {
-    eager: true
-  })
+  @OneToMany(type => Card, card => card.category, { eager: true })
   @JoinTable()
   cards: Card[];
 

@@ -1,4 +1,4 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne, OneToOne, JoinColumn, OneToMany } from 'typeorm';
 
 import { Category } from './category';
 
@@ -10,24 +10,35 @@ export class Card extends BaseEntity {
   @Column()
   content: string;
 
-  // @Column()
-  // displayed: number;
+  // @Column('int')
+  // count: number;
 
-  // @Column()
+  // @Column('int')
   // correct: number;
 
-  // @Column()
+  // @Column('int')
   // wrong: number;
 
   @ManyToOne(type => Category, category => category.cards)
+  @JoinColumn()
   category: Category;
+
+  // @OneToOne(type => Card, { eager: true })
+  // @JoinColumn()
+  // link: Card;
 
   constructor (
     content: string,
-    category: Category
-  ) {
+    category: Category,
+    link?: Card
+  ) {  // @OneToOne(type => Card, { eager: true })
+  // @JoinColumn()
+  // link: Card;
     super();
     this.content = content;
     this.category = category;
+    // this.link = link ? link : null
+
+    // console.log('adding card', content, category);
   }
 }
