@@ -8,12 +8,25 @@
 
 
 <ion-content padding>
-  <ion-list *ngIf="category.cards?.length > 0">
-    <button ion-item *ngFor="let card of category.cards" (click)="increaseCorrect(card)">
-      {{card.front}} «» {{card.back}} [{{card.correct}}/{{card.wrong}}]
-    </button>
-  </ion-list>
-  <ion-title *ngIf="!category.cards">
-    Inhalte werden geladen ...
+  <div class="learning" *ngIf="category.cards?.length > 0">
+    <div class="learning-card" *ngIf="getCurrent()">
+      <div class="learning-card-item">
+        <div class="learning-card-item-front">
+          {{getCurrent().front}}
+        </div>
+        <div class="learning-card-item-back">
+          {{getCurrent().back}}
+        </div>
+      </div>
+
+      <div class="learning-card-actions">
+        <button ion-button icon-start color="danger" (click)="next(false)">Falsch</button>
+        <button ion-button icon-end color="primary" (click)="next(true)">Richtig</button>
+      </div>
+    </div>
+  </div>
+  <ion-title *ngIf="category.cards?.length === 0">
+    <h3>Du hast es geschafft</h3>
+    <p>{{run.correct}} von {{run.total}} richtig</p>
   </ion-title>
 </ion-content>

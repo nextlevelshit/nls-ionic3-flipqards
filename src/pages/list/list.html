@@ -7,12 +7,69 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="outer-content">
   <ion-list>
-    <button ion-item *ngFor="let category of categories" (click)="categorySelected($event, category.id)">
-      {{category.name}}
-    </button>
+    <ion-list-header>
+      Wähle eine Kategorie aus, die du jetzt lernen oder bearbeiten möchtest.
+    </ion-list-header>
+    <ion-item *ngFor="let category of categories">
+      <ion-label (click)="categorySelected($event, category.id)">
+        {{category.name}}
+      </ion-label>
+      <button ion-button outline item-end color="dark" (click)="console.log('editing ' + category.name);">Bearbeiten</button>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>
+      Vorgeschlagene Kategorien
+    </ion-list-header>
+    <ion-item>
+      <ion-label (click)="console.log('show suggested category');">
+        Philosophie
+      </ion-label>
+      <button ion-button outline item-end (click)="console.log('adding suggested category');">Hinzufügen</button>
+    </ion-item>
+    <ion-item>
+      <ion-label (click)="console.log('show suggested category');">
+        Computer Science
+      </ion-label>
+      <button ion-button outline item-end (click)="console.log('adding suggested category');">Hinzufügen</button>
+    </ion-item>
+    <ion-item>
+      <ion-label (click)="console.log('show suggested category');">
+        Literatur
+      </ion-label>
+      <button ion-button outline item-end (click)="console.log('adding suggested category');">Hinzufügen</button>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>
+      Konfiguration
+    </ion-list-header>
+    <ion-item>
+      <ion-icon name="school" item-start></ion-icon>
+      <ion-label>Algorythmisches Lernen</ion-label>
+      <ion-toggle color="primary"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="settings" item-start></ion-icon>
+      <ion-label>Automatisch synchronisieren</ion-label>
+      <ion-toggle color="primary"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="stats" item-start></ion-icon>
+      <ion-label>Statistik anzeigen</ion-label>
+      <ion-toggle color="primary"></ion-toggle>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>
+      Weitere Funktionen
+    </ion-list-header>
+    <ion-item>
+      <button ion-button block large (click)="addCategory()">Neue Kategorie hinzufügen</button>
+    </ion-item>
   </ion-list>
 
-  <button ion-button (click)="addCategory()">Neue Kategorie hinzufügen</button>
+
 </ion-content>
