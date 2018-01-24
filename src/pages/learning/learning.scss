@@ -13,6 +13,7 @@
       backface-visibility: hidden;
       border-radius: 0.5rem;
       font-size: 4rem;
+      // animation: 360ms slide-top;
 
       &-front,
       &-back {
@@ -24,6 +25,8 @@
         height: 100%;
         top: 0;
         left: 0;
+        text-align: center;
+        padding: 1rem;
         background: linear-gradient(
                         to bottom,
                         $color-white,
