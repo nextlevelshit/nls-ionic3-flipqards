@@ -13,6 +13,7 @@ export class LearningPage {
   category: Category = this.navParams.get('category');
   cards: Card[];
   run;
+  flipped: false;
 
   constructor(
     public navCtrl: NavController,
