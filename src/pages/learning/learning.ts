@@ -14,42 +14,35 @@ import { Observable } from 'rxjs/Rx';
     trigger('card', [
       state('init', style({
         transform: 'none',
-        filter: 'none',
         opacity: 1
       })),
       state('swipeLeft', style({
-        transform: 'translate3d(0,0,-100vh)',
-        filter: 'blur(10px)',
+        transform: 'translate3d(0,2vh,-16vh) rotateX(13deg)',
         opacity: 0
       })),
       state('swipeRight', style({
-        transform: 'translate3d(0,0,-100vh)',
-        filter: 'blur(10px)',
+        transform: 'translate3d(0,2vh,-16vh) rotateX(13deg)',
         opacity: 0
       })),
       transition('* => init, :enter', [
         style({
-          transform: 'translate3d(0,0,-100vh)',
-          filter: 'blur(10px)',
+          transform: 'translate3d(0,2vh,-16vh) rotateX(13deg)',
           opacity: 0
         }),
-        animate(600, style({
+        animate('220ms cubic-bezier(.65,.30,.8,.9)', style({
           transform: 'none',
-          filter: 'none',
           opacity: 1
         }))
       ]),
       transition('* => swipeRight', [
-        animate(400, style({
-          transform: 'translate3d(50vw,0,0)',
-          filter: 'blur(10px)',
+        animate('280ms ease-in', style({
+          transform: 'translate3d(20vw,0,0) rotateY(-30deg)',
           opacity: 0
         }))
       ]),
       transition('* => swipeLeft', [
-        animate(400, style({
-          transform: 'translate3d(-50vw,0,0)',
-          filter: 'blur(10px)',
+        animate('280ms ease-in', style({
+          transform: 'translate3d(-20vw,0,0) rotateY(30deg)',
           opacity: 0
         }))
       ])
@@ -63,12 +56,13 @@ export class LearningPage {
   flipped: boolean = false;
   cardState: string;
   active: boolean = true;
+  clone: Card;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams
   ) {
-
+    this.cloneCard();
   }
 
   ionViewDidLoad() {
@@ -82,21 +76,29 @@ export class LearningPage {
   public next(answer: boolean) {
     if (answer) {
       this.cardState = 'swipeRight';
-      this.increaseCorrect(this.getCurrent());
+      this.increaseCorrect(this.category.cards[0]);
     } else {
-      this.increaseWrong(this.getCurrent());
+      this.increaseWrong(this.category.cards[0]);
       this.cardState = 'swipeLeft';
     }
-    this.flipped = false;
 
-    Observable.interval(600).take(1).subscribe(() => {
+    Observable.interval(360).take(1).subscribe(() => {
       this.category.cards.shift();
+      this.cloneCard();
       this.cardState = 'init';
     });
   }
 
-  public getCurrent() {
-    return this.category.cards[0];
+  private cloneCard() {
+    let currentCard = this.category.cards[0];
+    this.clone = Object.assign({}, currentCard);
+
+    console.log(this.clone);
+
+    if (this.flipped) {
+      this.clone.front = currentCard.back;
+      this.clone.back = currentCard.front;
+    }
   }
 
   public increaseCorrect(card: Card) {

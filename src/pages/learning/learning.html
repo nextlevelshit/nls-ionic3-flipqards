@@ -9,13 +9,13 @@
 
 <ion-content padding>
   <div class="learning" *ngIf="category.cards?.length > 0">
-    <div class="learning-card" *ngIf="getCurrent()" >
+    <div class="learning-card">
       <div class="learning-card-item" [ngClass]="{'--flipped': flipped}" [@card]="cardState" (click)="flipped=!flipped">
         <div class="learning-card-item-front">
-          {{getCurrent().front}}
+          {{clone.front}}
         </div>
         <div class="learning-card-item-back">
-          {{getCurrent().back}}
+          {{clone.back}}
         </div>
       </div>
     </div>
