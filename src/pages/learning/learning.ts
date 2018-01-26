@@ -12,58 +12,42 @@ import { Observable } from 'rxjs/Rx';
   templateUrl: 'learning.html',
   animations: [
     trigger('card', [
-      // state('show', style({
-      //   transform: 'translate3d(0,0,0)',
-      //   filter: 'blur(0)',
-      //   opacity: 1
-      // })),
-      // state('swipeLeft', style({
-      //   transform: 'translateX(-100%)',
-      //   opacity: 0
-      // })),
-      transition(':enter', [
+      state('init', style({
+        transform: 'none',
+        filter: 'none',
+        opacity: 1
+      })),
+      state('swipeLeft', style({
+        transform: 'translate3d(0,0,-100vh)',
+        filter: 'blur(10px)',
+        opacity: 0
+      })),
+      state('swipeRight', style({
+        transform: 'translate3d(0,0,-100vh)',
+        filter: 'blur(10px)',
+        opacity: 0
+      })),
+      transition('* => init, :enter', [
         style({
           transform: 'translate3d(0,0,-100vh)',
           filter: 'blur(10px)',
           opacity: 0
         }),
-        animate(500, style({
-          transform: 'translate3d(0,0,0)',
-          filter: 'blur(0)',
-          opacity: 1
-        }))
-      ]),
-      transition(':leave', [
-        style({
-          transform: 'translate3d(0,0,-100vh)',
-          filter: 'blur(10px)',
-          opacity: 0
-        }),
-        animate(500, style({
-          transform: 'translate3d(0,0,0)',
-          filter: 'blur(0)',
+        animate(600, style({
+          transform: 'none',
+          filter: 'none',
           opacity: 1
         }))
       ]),
       transition('* => swipeRight', [
-        style({
-          transform: 'translate3d(0,0,0)',
-          filter: 'blur(0)',
-          opacity: 1
-        }),
-        animate(800, style({
+        animate(400, style({
           transform: 'translate3d(50vw,0,0)',
           filter: 'blur(10px)',
           opacity: 0
         }))
       ]),
       transition('* => swipeLeft', [
-        style({
-          transform: 'translate3d(0,0,0)',
-          filter: 'blur(0)',
-          opacity: 1
-        }),
-        animate(800, style({
+        animate(400, style({
           transform: 'translate3d(-50vw,0,0)',
           filter: 'blur(10px)',
           opacity: 0
@@ -105,9 +89,9 @@ export class LearningPage {
     }
     this.flipped = false;
 
-    Observable.interval(1000).take(1).subscribe(() => {
+    Observable.interval(600).take(1).subscribe(() => {
       this.category.cards.shift();
-      this.cardState = undefined;
+      this.cardState = 'init';
     });
   }
 
