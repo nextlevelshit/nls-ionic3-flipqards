@@ -3,17 +3,19 @@
   $color-black: rgb(222, 228, 228);
 
   &-card {
-    height: 300px;
     display: block;
     position: relative;
-    transform: perspective(2000px);
+    perspective: 1000px;
     transform-style: preserve-3d;
 
     &-item {
+      height: 300px;
       backface-visibility: hidden;
-      border-radius: 0.5rem;
+      border-radius: 1rem;
       font-size: 4rem;
-      // animation: 360ms slide-top;
+      // transform: translate3d(0,0,0);
+      // filter: blur(0);
+      // opacity: 1;
 
       &-front,
       &-back {
@@ -40,9 +42,11 @@
 
       &-front {
         transform: rotateY(0deg);
+        backface-visibility: hidden;
       }
       &-back {
         transform: rotateY(-180deg);
+        backface-visibility: hidden;
       }
 
       &.--flipped &-front {
