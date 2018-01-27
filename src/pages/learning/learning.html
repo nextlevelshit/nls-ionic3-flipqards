@@ -10,7 +10,7 @@
 <ion-content padding>
   <div class="learning" *ngIf="category.cards?.length > 0 || algorithmicLearning">
     <div class="learning-card">
-      <div class="learning-card-item" [ngClass]="{'--flipped': flipped}" [@card]="cardState" (click)="flipped=!flipped">
+      <div class="learning-card-item" [ngClass]="{'--flipped': flipped}" [@card]="cardState" (click)="flipped=!flipped" *ngIf="clone">
         <div class="learning-card-item-front">
           {{clone.front}}
         </div>
@@ -19,10 +19,26 @@
         </div>
       </div>
     </div>
-    <div class="learning-actions">
-      <button ion-button icon-start color="danger" (click)="next(false)">Falsch</button>
-      <button ion-button icon-end color="primary" (click)="next(true)">Richtig</button>
+    <div class="learning-actions" padding-top>
+      <button ion-button icon-end large color="danger" (click)="next(false)">
+        <ion-label>Falsch</ion-label>
+        <ion-icon name="close" item-start></ion-icon>
+      </button>
+      <button ion-button icon-start large float-right color="primary" (click)="next(true)">
+        <ion-icon name="checkmark" item-start></ion-icon>
+        <ion-label>Richtig</ion-label>
+      </button>
     </div>
+    <ion-grid class="learning-stats">
+      <ion-row>
+        <ion-col>
+          <pre>{{stats|json}}</pre>
+        </ion-col>
+        <ion-col>
+          <pre>{{clone|json}}</pre>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
   <ion-title *ngIf="category.cards?.length === 0 || sessionEnd">
     <h3>Du hast es geschafft</h3>

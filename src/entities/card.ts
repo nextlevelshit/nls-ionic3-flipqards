@@ -1,4 +1,4 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne, OneToOne, JoinColumn, OneToMany } from 'typeorm';
+import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 import { Category } from './category';
 
@@ -19,9 +19,18 @@ export class Card extends BaseEntity {
   @Column({nullable: true, default: 0})
   wrong: number;
 
+  @Column({nullable: true, default: 0})
+  strike: number;
+
   @ManyToOne(type => Category, category => category.cards)
   @JoinColumn()
   category: Category;
+
+  @CreateDateColumn()
+  created_at: Date
+
+  @UpdateDateColumn()
+  updated_at: Date
 
   constructor (
     front: string,
@@ -36,5 +45,10 @@ export class Card extends BaseEntity {
 
   public views() {
     return this.correct + this.wrong;
+  }
+
+  public updateStrike(answer: boolean) {
+    this.strike = (answer ? this.strike + 1 : 0);
+    this.save();
   }
 }

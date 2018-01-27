@@ -52,14 +52,14 @@ import { Observable } from 'rxjs/Rx';
 export class LearningPage {
   category: Category = this.navParams.get('category');
   cards: Card[];
-  run;
   flipped: boolean = false;
   cardState: string;
-  active: boolean = true;
   clone: Card;
-  algorithmicLearning: false;
-  sessionEnd: false;
+  algorithmicLearning: boolean = true;
+  sessionStart: Date = new Date();
+  sessionEnd: boolean = false;
   original: Card;
+  stats;
 
   constructor(
     public navCtrl: NavController,
@@ -69,14 +69,17 @@ export class LearningPage {
   }
 
   ionViewDidLoad() {
-    this.run = {
+    this.stats = {
       wrong: 0,
       correct: 0,
-      total: this.category.cards.length
+      total: this.category.cards.length,
+      sessions: 0
     };
   }
 
   public next(answer: boolean) {
+    this.original.updateStrike(answer);
+
     if (answer) {
       this.cardState = 'swipeRight';
       this.increaseCorrect(this.original);
@@ -100,16 +103,33 @@ export class LearningPage {
    * properties of original Card entity
    */
   private cloneCard(): void {
-    this.original = this.category.cards[0];
-    this.clone = Object.assign({}, this.original);
+
 
     /**
      * Infinitely show new cards till user decides to quit
      * learning session manually
      */
     if(this.algorithmicLearning) {
+      let sortedCards = this.category.cards.filter((a) => {
+        return this.sessionStart.getTime() > a.updated_at.getTime();
+      });
 
+      if(sortedCards.length <= 0) {
+        sortedCards = this.category.cards;
+        this.stats.sessions += 1;
+        this.sessionStart = new Date();
+      }
+
+      sortedCards.sort((a, b) => {
+        return a.strike - b.strike;
+      });
+
+      this.original = sortedCards[0];
+    } else {
+      this.original = this.category.cards[0];
     }
+
+    this.clone = Object.assign({}, this.original);
 
     /**
      * Switch backside and frontside if card has been flipped to show
@@ -130,7 +150,7 @@ export class LearningPage {
    * TODO: Move to Card entity
    */
   public increaseCorrect(card: Card) {
-    this.run.correct += 1;
+    this.stats.correct += 1;
     card.correct += 1;
     card.save();
   }
@@ -142,7 +162,7 @@ export class LearningPage {
    * TODO: Move to Card entity
    */
   public increaseWrong(card: Card) {
-    this.run.wrong += 1;
+    this.stats.wrong += 1;
     card.wrong += 1;
     card.save();
   }

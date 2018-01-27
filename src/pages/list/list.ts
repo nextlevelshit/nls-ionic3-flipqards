@@ -20,24 +20,22 @@ export class ListPage {
     private alertCtrl: AlertController,
     private toastCtrl: ToastController
   ) {
-
+    Category.find().then(categories => {
+      this.categories = categories;
+    });
   }
 
   ionViewDidLoad() {
-    this.runDemo();
+
   }
 
-  async runDemo() {
-    this.categories = await Category.all();
-  }
-
-  categorySelected(e, id) {
+  public categorySelected(e, id) {
     Category.findOneById(id).then(category => {
       this.navCtrl.push(LearningPage, {category: category});
     });
   }
 
-  addCategory(message?) {
+  public addCategory(message?) {
     this.alertCtrl.create({
       title: 'Neue Kategorie',
       subTitle: message ? message : '',

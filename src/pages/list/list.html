@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content class="outer-content">
-  <ion-list>
+  <ion-list *ngIf="categories?.length > 0">
     <ion-list-header>
       Wähle eine Kategorie aus, die du jetzt lernen oder bearbeiten möchtest.
     </ion-list-header>

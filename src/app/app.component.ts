@@ -63,7 +63,7 @@ export class MyApp {
               });
             });
           });
-          // this.nav.setRoot(ListPage);
+          this.nav.setRoot(ListPage);
         });
       } else {
         await createConnection({
