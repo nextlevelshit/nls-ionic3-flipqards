@@ -50,14 +50,14 @@ import { Observable } from 'rxjs/Rx';
   ]
 })
 export class LearningPage {
-  category: Category = this.navParams.get('category');
+  category: Category;
   cards: Card[];
   flipped: boolean = false;
   cardState: string;
   clone: Card;
-  algorithmicLearning: boolean = true;
-  sessionStart: Date = new Date();
-  sessionEnd: boolean = false;
+  algorithmicLearning: boolean;
+  sessionStart: Date;
+  sessionEnd: boolean;
   original: Card;
   stats;
 
@@ -65,6 +65,11 @@ export class LearningPage {
     public navCtrl: NavController,
     public navParams: NavParams
   ) {
+    this.category = this.navParams.get('category');
+    this.algorithmicLearning = true;
+    this.sessionStart = new Date();
+    this.sessionEnd = false;
+    this.flipped = false;
     this.cloneCard();
   }
 

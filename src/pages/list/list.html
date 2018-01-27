@@ -16,7 +16,7 @@
       <ion-label (click)="categorySelected($event, category.id)">
         {{category.name}}
       </ion-label>
-      <button ion-button outline item-end color="dark" (click)="console.log('editing ' + category.name);">Bearbeiten</button>
+      <button ion-button outline item-end color="dark" (click)="editCategory($event, category)">Bearbeiten</button>
     </ion-item>
   </ion-list>
   <ion-list>

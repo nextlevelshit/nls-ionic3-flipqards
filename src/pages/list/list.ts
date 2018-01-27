@@ -1,10 +1,10 @@
-
 import { AlertController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 
 import { Category } from './../../entities/category';
+import { DetailsPage } from './../details/details';
 import { LearningPage } from './../learning/learning';
 
 @Component({
@@ -33,6 +33,10 @@ export class ListPage {
     Category.findOneById(id).then(category => {
       this.navCtrl.push(LearningPage, {category: category});
     });
+  }
+
+  public editCategory(e, category) {
+    this.navCtrl.push(DetailsPage, {category: category});
   }
 
   public addCategory(message?) {

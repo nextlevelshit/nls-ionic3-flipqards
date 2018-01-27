@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>{{category.name}} bearbeiten</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+  <ion-content class="outer-content">
+    <div class="details">
+      <ion-card>
+        <ion-card-header>
+          {{category.name}}
+        </ion-card-header>
+        <ion-card-content>
+          Meta informationen
+        </ion-card-content>
+      </ion-card>
+      <ion-list margin-top *ngIf="category.cards?.length > 0">
+        <ion-list-header>
+          Lernkarten
+        </ion-list-header>
+        <ion-item *ngFor="let card of category.cards">
+          <h2>{{card.front}}</h2>
+          <p>{{card.back}}</p>
+        </ion-item>
+      </ion-list>
+      <p *ngIf="!category.cards">
+        Keine Lernkarten gefunden
+      </p>
+      <ion-list>
+        <ion-list-header>
+          Weitere Funktionen
+        </ion-list-header>
+        <ion-item>
+          <button ion-button block large (click)="addCards()">Neue Karten hinzufügen</button>
+        </ion-item>
+        <ion-item>
+          <button ion-button block large (click)="importCards()">Karten importieren</button>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-content>
