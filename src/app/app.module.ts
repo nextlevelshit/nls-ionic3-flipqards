@@ -4,6 +4,10 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { FilePath } from '@ionic-native/file-path';
+import { File } from '@ionic-native/file';
+
 
 import { MyApp } from './app.component';
 import { DetailsPage } from './../pages/details/details';
@@ -34,6 +38,9 @@ import { ListPage } from '../pages/list/list';
     LearningPage
   ],
   providers: [
+    File,
+    FileChooser,
+    FilePath,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

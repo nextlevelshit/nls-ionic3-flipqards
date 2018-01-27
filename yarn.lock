@@ -72,6 +72,18 @@
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@ionic-native/core/-/core-4.4.0.tgz#fb0f071543bd2725d858f5a0f5c20adbece20df4"
 
+"@ionic-native/file-chooser@^4.5.3":
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/@ionic-native/file-chooser/-/file-chooser-4.5.3.tgz#51290d5fc2371f85846cb0145e6cdaa4a63ed739"
+
+"@ionic-native/file-path@^4.5.3":
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/@ionic-native/file-path/-/file-path-4.5.3.tgz#bf175e59687b5038d4d017149ed5731bd0821f1f"
+
+"@ionic-native/file@^4.5.3":
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/@ionic-native/file/-/file-4.5.3.tgz#a8af6b56a8ee4bcfdb241ff24b20a9eedb5230ef"
+
 "@ionic-native/splash-screen@4.4.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@ionic-native/splash-screen/-/splash-screen-4.4.0.tgz#81ed723d7fd3f0d643072b5461fa0c32dcc330b1"
@@ -779,9 +791,25 @@ cordova-common@^2.1.0:
     underscore "^1.8.3"
     unorm "^1.3.3"
 
+cordova-plugin-compat@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-compat/-/cordova-plugin-compat-1.2.0.tgz#0bc65757276ebd920c012ce920e274177576373e"
+
 cordova-plugin-device@^1.1.4:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/cordova-plugin-device/-/cordova-plugin-device-1.1.7.tgz#fc94111be6932628c66868938ddf3dc82c9fbfe6"
+
+cordova-plugin-file@^4.3.3:
+  version "4.3.3"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-file/-/cordova-plugin-file-4.3.3.tgz#012e97aa1afb91f84916e6341b548366d23de9b9"
+
+cordova-plugin-filechooser@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-filechooser/-/cordova-plugin-filechooser-1.0.1.tgz#fa59e97b8cdd91260be0bec460db8ec5de93488f"
+
+cordova-plugin-filepath@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-filepath/-/cordova-plugin-filepath-1.1.0.tgz#e417a0a395b9712916cd762d1c7cc38408c3a05b"
 
 cordova-plugin-ionic-webview@^1.1.16:
   version "1.1.16"
@@ -2433,6 +2461,10 @@ p-try@^1.0.0:
 pako@~1.0.5:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.6.tgz#0101211baa70c4bca4a0f63f2206e97b7dfaf258"
+
+papaparse@^4.3.6:
+  version "4.3.6"
+  resolved "https://registry.yarnpkg.com/papaparse/-/papaparse-4.3.6.tgz#9566eda0ecab13afcb740a62381c699f486cb145"
 
 parent-require@^1.0.0:
   version "1.0.0"
