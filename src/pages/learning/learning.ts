@@ -57,6 +57,9 @@ export class LearningPage {
   cardState: string;
   active: boolean = true;
   clone: Card;
+  algorithmicLearning: false;
+  sessionEnd: false;
+  original: Card;
 
   constructor(
     public navCtrl: NavController,
@@ -76,37 +79,68 @@ export class LearningPage {
   public next(answer: boolean) {
     if (answer) {
       this.cardState = 'swipeRight';
-      this.increaseCorrect(this.category.cards[0]);
+      this.increaseCorrect(this.original);
     } else {
-      this.increaseWrong(this.category.cards[0]);
+      this.increaseWrong(this.original);
       this.cardState = 'swipeLeft';
     }
 
-    Observable.interval(360).take(1).subscribe(() => {
+    if(!this.algorithmicLearning) {
       this.category.cards.shift();
+    }
+
+    Observable.interval(360).take(1).subscribe(() => {
       this.cloneCard();
       this.cardState = 'init';
     });
   }
 
-  private cloneCard() {
-    let currentCard = this.category.cards[0];
-    this.clone = Object.assign({}, currentCard);
+  /**
+   * Show in template only the cloned card to avoid changing
+   * properties of original Card entity
+   */
+  private cloneCard(): void {
+    this.original = this.category.cards[0];
+    this.clone = Object.assign({}, this.original);
 
-    console.log(this.clone);
+    /**
+     * Infinitely show new cards till user decides to quit
+     * learning session manually
+     */
+    if(this.algorithmicLearning) {
 
-    if (this.flipped) {
-      this.clone.front = currentCard.back;
-      this.clone.back = currentCard.front;
     }
+
+    /**
+     * Switch backside and frontside if card has been flipped to show
+     * frontside always at first after animations
+     * TODO: Add own function
+     */
+    if(this.flipped && this.clone) {
+      this.clone.front = this.original.back;
+      this.clone.back = this.original.front;
+    }
+
   }
 
+  /**
+   * Increase the amount of correctly answered Card and save
+   * to database
+   * @param card
+   * TODO: Move to Card entity
+   */
   public increaseCorrect(card: Card) {
     this.run.correct += 1;
     card.correct += 1;
     card.save();
   }
 
+  /**
+   * Increase the amount of wrongly answered Card and save
+   * to database
+   * @param card
+   * TODO: Move to Card entity
+   */
   public increaseWrong(card: Card) {
     this.run.wrong += 1;
     card.wrong += 1;

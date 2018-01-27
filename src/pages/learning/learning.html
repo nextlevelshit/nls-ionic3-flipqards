@@ -8,7 +8,7 @@
 
 
 <ion-content padding>
-  <div class="learning" *ngIf="category.cards?.length > 0">
+  <div class="learning" *ngIf="category.cards?.length > 0 || algorithmicLearning">
     <div class="learning-card">
       <div class="learning-card-item" [ngClass]="{'--flipped': flipped}" [@card]="cardState" (click)="flipped=!flipped">
         <div class="learning-card-item-front">
@@ -24,7 +24,7 @@
       <button ion-button icon-end color="primary" (click)="next(true)">Richtig</button>
     </div>
   </div>
-  <ion-title *ngIf="category.cards?.length === 0">
+  <ion-title *ngIf="category.cards?.length === 0 || sessionEnd">
     <h3>Du hast es geschafft</h3>
     <p>{{run.correct}} von {{run.total}} richtig</p>
   </ion-title>
