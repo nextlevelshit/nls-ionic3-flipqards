@@ -57,15 +57,15 @@ export class MyApp {
           ],
           dropSchema: true
         }).then((connection) => {
-          ['Türkisch', 'Geschichte', 'Coding'].forEach(name => {
-            new Category(name).save().then(category => {
-              [`Vorderseite 1 (${name})`, `Vorderseite 2 (${name})`, `Vorderseite 3 (${name})`].forEach(content => {
-                new Card(content, 'Rückseite', category).save();
-              });
+          let name = 'Geschichte';
+
+          new Category(name).save().then(category => {
+            Promise.all([`Vorderseite 1 (${name})`, `Vorderseite 2 (${name})`, `Vorderseite 3 (${name})`].map(async (card) => {
+              return new Card(card, 'Rückseite', category).save();
+            })).then((res) => {
+              console.log(res);
+              this.nav.setRoot(ListPage);
             });
-          });
-          Observable.interval(3000).take(1).subscribe(() => {
-            this.nav.setRoot(ListPage);
           });
         });
       } else {

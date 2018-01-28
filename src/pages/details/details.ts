@@ -1,8 +1,10 @@
+import { Observable } from 'rxjs/Rx';
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { File } from '@ionic-native/file';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
+import { getRepository } from 'typeorm';
 import * as papa from 'papaparse';
 
 import { Category } from './../../entities/category';
@@ -32,11 +34,18 @@ export class DetailsPage {
   }
 
   ionViewDidLoad() {
-
+    Observable.interval(3000).subscribe(() => {
+      console.log(this.category.name);
+      getRepository(Category).findOneById(this.category.id).then(c => {
+        console.log(c);
+      });
+    });
   }
 
   public addCards() {
-
+    new Card('Test 1', 'Rückseite 1', this.category).save().then(() => {
+      this.updateCards();
+    });
   }
 
   public importCards() {
@@ -81,11 +90,14 @@ export class DetailsPage {
 
   private startImport() {
     if(this.import.length > 0) {
-      this.import.forEach((card) => {
+      Promise.all(this.import.map(async (card) => {
         if (card[0].length > 0 && card[1].length) {
-          new Card(card[0], card[1], this.category).save();
+          return new Card(card[0], card[1], this.category).save();
         }
+      })).then((res) => {
+        this.updateCards();
       });
+
       this.toastCtrl.create({
         message: `Erfolgreicher Import`,
         duration: 3000,
@@ -104,7 +116,8 @@ export class DetailsPage {
   }
 
   private updateCards() {
-    console.log(this.category.cards);
-    this.cards = this.category.cards;
+    getRepository(Category).findOneById(this.category.id).then(category => {
+      this.cards = category.cards;
+    });
   }
 }

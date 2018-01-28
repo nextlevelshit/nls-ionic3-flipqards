@@ -14,16 +14,16 @@
           Meta informationen
         </ion-card-content>
       </ion-card>
-      <ion-list margin-top *ngIf="category.cards?.length > 0">
+      <ion-list margin-top *ngIf="cards?.length > 0">
         <ion-list-header>
           Lernkarten
         </ion-list-header>
-        <ion-item *ngFor="let card of category.cards">
+        <ion-item *ngFor="let card of cards">
           <h2>{{card.front}}</h2>
           <p>{{card.back}}</p>
         </ion-item>
       </ion-list>
-      <p *ngIf="!category.cards">
+      <p *ngIf="!cards" padding>
         Keine Lernkarten gefunden
       </p>
       <ion-list>
