@@ -120,4 +120,35 @@ export class DetailsPage {
       this.cards = category.cards;
     });
   }
+
+  public cardSelected(card: Card) {
+    this.alertCtrl.create({
+      title: 'Lernkarte bearbeiten',
+      buttons: [
+        {
+          text: 'Abbrechen',
+          role: 'cancel'
+        },
+        {
+          text: 'Löschen',
+          handler: () => {
+            card.remove().then(() => {
+              this.updateCards();
+              this.toastCtrl.create({
+                message: `Lernkarte erfolgreich gelöscht`,
+                duration: 3000,
+                position: 'bottom'
+              }).present();
+            });
+          }
+        },
+        {
+          text: 'Bearbeiten',
+          handler: () => {
+            console.log('Editing', card);
+          }
+        }
+      ]
+    }).present();
+  }
 }

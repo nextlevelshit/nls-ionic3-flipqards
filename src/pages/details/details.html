@@ -18,7 +18,7 @@
         <ion-list-header>
           Lernkarten
         </ion-list-header>
-        <ion-item *ngFor="let card of cards">
+        <ion-item *ngFor="let card of cards" (click)="cardSelected(card)">
           <h2>{{card.front}}</h2>
           <p>{{card.back}}</p>
         </ion-item>
