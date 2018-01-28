@@ -20,13 +20,12 @@ export class ListPage {
     private alertCtrl: AlertController,
     private toastCtrl: ToastController
   ) {
-    Category.find().then(categories => {
+    Category.all().then(categories => {
       this.categories = categories;
     });
   }
 
   ionViewDidLoad() {
-
   }
 
   public categorySelected(e, id) {

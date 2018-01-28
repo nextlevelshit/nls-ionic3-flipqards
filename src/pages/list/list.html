@@ -7,10 +7,12 @@
   </ion-navbar>
 </ion-header>
 
+<pre>{{categories | json}}</pre>
+
 <ion-content class="outer-content">
   <ion-list *ngIf="categories?.length > 0">
     <ion-list-header>
-      Wähle eine Kategorie aus, die du jetzt lernen oder bearbeiten möchtest.
+      Meine Kategorien
     </ion-list-header>
     <ion-item *ngFor="let category of categories">
       <ion-label (click)="categorySelected($event, category.id)">
@@ -19,7 +21,17 @@
       <button ion-button outline item-end color="dark" (click)="editCategory($event, category)">Bearbeiten</button>
     </ion-item>
   </ion-list>
-  <ion-list>
+  <ion-list *ngIf="categories?.length === 0">
+    <ion-list-header>
+      Meine Kategorien
+    </ion-list-header>
+    <ion-item>
+      <p>
+        Bisher wurden noch keine Kategorien hinzugefügt. Erstelle jetzt eine Kategorie: <a (click)="addCategory()">Kategorie erstellen</a>
+      </p>
+    </ion-item>
+  </ion-list>
+  <ion-list padding-top>
     <ion-list-header>
       Vorgeschlagene Kategorien
     </ion-list-header>
@@ -42,7 +54,7 @@
       <button ion-button outline item-end (click)="console.log('adding suggested category');">Hinzufügen</button>
     </ion-item>
   </ion-list>
-  <ion-list>
+  <ion-list padding-top>
     <ion-list-header>
       Konfiguration
     </ion-list-header>
