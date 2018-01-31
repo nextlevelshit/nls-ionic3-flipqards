@@ -2,8 +2,6 @@ import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinTabl
 
 import { Card } from './card';
 
-
-
 @Entity('category')
 export class Category extends BaseEntity {
   @PrimaryGeneratedColumn()

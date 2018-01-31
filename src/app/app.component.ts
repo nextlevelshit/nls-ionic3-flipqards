@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs/Rx';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -9,6 +8,8 @@ import { HomePage } from './../pages/home/home';
 import { ListPage } from './../pages/list/list';
 import { Category } from './../entities/category';
 import { Card } from './../entities/card';
+import * as MockCategory from './../entities/category.mock.json';
+import * as MockCard from './../entities/card.mock.json';
 
 @Component({
   templateUrl: 'app.html'
@@ -57,16 +58,25 @@ export class MyApp {
           ],
           dropSchema: true
         }).then((connection) => {
-          let name = 'Geschichte';
-
-          new Category(name).save().then(category => {
-            Promise.all([`Vorderseite 1 (${name})`, `Vorderseite 2 (${name})`, `Vorderseite 3 (${name})`].map(async (card) => {
-              return new Card(card, 'Rückseite', category).save();
-            })).then((res) => {
-              console.log(res);
+          Promise.all(MockCategory.map(async (category) => {
+            return new Category(category).save();
+          })).then((res: Category[]) => {
+            Promise.all(MockCard.map(async (card) => {
+              return new Card(card[0], card[1], res[0]).save();
+            })).then(res => {
               this.nav.setRoot(ListPage);
             });
           });
+          // let name = 'Geschichte';
+
+          // new Category(name).save().then(category => {
+          //   Promise.all([`Vorderseite 1 (${name})`, `Vorderseite 2 (${name})`, `Vorderseite 3 (${name})`].map(async (card) => {
+          //     return new Card(card, 'Rückseite', category).save();
+          //   })).then((res) => {
+          //     console.log(res);
+          //     this.nav.setRoot(ListPage);
+          //   });
+          // });
         });
       } else {
         await createConnection({

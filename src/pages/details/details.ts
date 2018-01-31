@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Rx';
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ToastController, ActionSheetController, Platform } from 'ionic-angular';
 import { File } from '@ionic-native/file';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
@@ -21,10 +21,12 @@ export class DetailsPage {
   cards: Card[];
 
   constructor(
+    public platform: Platform,
     public navCtrl: NavController,
     public navParams: NavParams,
     private file: File,
     private alertCtrl: AlertController,
+    private actionSheetCtrl: ActionSheetController,
     private toastCtrl: ToastController,
     private fileChooser: FileChooser,
     private filePath: FilePath
@@ -34,12 +36,12 @@ export class DetailsPage {
   }
 
   ionViewDidLoad() {
-    Observable.interval(3000).subscribe(() => {
-      console.log(this.category.name);
-      getRepository(Category).findOneById(this.category.id).then(c => {
-        console.log(c);
-      });
-    });
+    // Observable.interval(3000).subscribe(() => {
+    //   console.log(this.category.name);
+    //   getRepository(Category).findOneById(this.category.id).then(c => {
+    //     console.log(c);
+    //   });
+    // });
   }
 
   public addCards() {
@@ -51,8 +53,10 @@ export class DetailsPage {
   public importCards() {
     this.fileChooser.open()
       .then(uri => {
+        console.log('file picked');
         this.filePath.resolveNativePath(uri)
           .then(filePath => {
+            console.log('file path resolved');
             let fileDir = filePath.substring(0, filePath.lastIndexOf('/'));
             let fileName = filePath.substring(filePath.lastIndexOf('/') + 1, filePath.length);
             let fileType = fileName.substring(fileName.lastIndexOf('.') + 1, fileName.length);
@@ -90,6 +94,8 @@ export class DetailsPage {
 
   private startImport() {
     if(this.import.length > 0) {
+      console.log('importing file');
+
       Promise.all(this.import.map(async (card) => {
         if (card[0].length > 0 && card[1].length) {
           return new Card(card[0], card[1], this.category).save();
@@ -122,31 +128,46 @@ export class DetailsPage {
   }
 
   public cardSelected(card: Card) {
-    this.alertCtrl.create({
+    this.actionSheetCtrl.create({
       title: 'Lernkarte bearbeiten',
       buttons: [
         {
-          text: 'Abbrechen',
-          role: 'cancel'
-        },
-        {
-          text: 'Löschen',
-          handler: () => {
-            card.remove().then(() => {
-              this.updateCards();
-              this.toastCtrl.create({
-                message: `Lernkarte erfolgreich gelöscht`,
-                duration: 3000,
-                position: 'bottom'
-              }).present();
-            });
-          }
-        },
-        {
           text: 'Bearbeiten',
+          icon: !this.platform.is('ios') ? 'hammer' : null,
           handler: () => {
             console.log('Editing', card);
           }
+        },{
+          text: 'Löschen',
+          icon: !this.platform.is('ios') ? 'trash' : null,
+          handler: () => {
+            this.alertCtrl.create({
+              title: 'Lernkarte wirklich löschen',
+              buttons: [
+                {
+                  text: 'Abbrechen',
+                  role: 'cancel'
+                },
+                {
+                  text: 'Löschen',
+                  handler: () => {
+                    card.remove().then(() => {
+                      this.updateCards();
+                      this.toastCtrl.create({
+                        message: `Lernkarte erfolgreich gelöscht`,
+                        duration: 3000,
+                        position: 'bottom'
+                      }).present();
+                    });
+                  }
+                }
+              ]
+            }).present();
+          }
+        },{
+          text: 'Abbrechen',
+          icon: !this.platform.is('ios') ? 'close' : null,
+          role: 'cancel'
         }
       ]
     }).present();
