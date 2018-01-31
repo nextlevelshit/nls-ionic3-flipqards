@@ -67,16 +67,6 @@ export class MyApp {
               this.nav.setRoot(ListPage);
             });
           });
-          // let name = 'Geschichte';
-
-          // new Category(name).save().then(category => {
-          //   Promise.all([`Vorderseite 1 (${name})`, `Vorderseite 2 (${name})`, `Vorderseite 3 (${name})`].map(async (card) => {
-          //     return new Card(card, 'Rückseite', category).save();
-          //   })).then((res) => {
-          //     console.log(res);
-          //     this.nav.setRoot(ListPage);
-          //   });
-          // });
         });
       } else {
         await createConnection({

@@ -10,10 +10,12 @@ import { File } from '@ionic-native/file';
 
 
 import { MyApp } from './app.component';
+
 import { DetailsPage } from './../pages/details/details';
 import { HomePage } from '../pages/home/home';
 import { LearningPage } from './../pages/learning/learning';
 import { ListPage } from '../pages/list/list';
+import { MarkdownPipe } from './../pipes/markdown.pipe';
 
 
 @NgModule({
@@ -23,6 +25,7 @@ import { ListPage } from '../pages/list/list';
     HomePage,
     LearningPage,
     ListPage,
+    MarkdownPipe
   ],
   imports: [
     BrowserModule,

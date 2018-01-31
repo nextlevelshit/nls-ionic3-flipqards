@@ -9,12 +9,12 @@
   <div class="learning" *ngIf="category.cards?.length > 0 || algorithmicLearning">
     <div class="learning-card">
       <div class="learning-card-item" [ngClass]="{'--flipped': flipped}" [@card]="cardState" (click)="flipped=!flipped" *ngIf="clone">
-        <div class="learning-card-item-front">
-          {{clone.front}}
-        </div>
-        <div class="learning-card-item-back">
-          {{clone.back}}
-        </div>
+        <div class="learning-card-item-front"
+          [ngClass]="{'--smallest': clone.front.length > 150, '--smaller': clone.front.length > 100, '--small': clone.front.length > 40}"
+          [innerHTML]="clone.front | markdown"></div>
+        <div class="learning-card-item-back"
+          [ngClass]="{'--smallest': clone.back.length > 150, '--smaller': clone.back.length > 100, '--small': clone.back.length > 40}"
+          [innerHTML]="clone.back | markdown"></div>
       </div>
     </div>
     <div class="learning-actions" padding-top>
