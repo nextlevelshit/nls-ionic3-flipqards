@@ -25,5 +25,8 @@
   "compileOnSave": false,
   "atom": {
     "rewriteTsconfig": false
-  }
+  },
+  "files": [
+    "typings.d.ts"
+  ]
 }

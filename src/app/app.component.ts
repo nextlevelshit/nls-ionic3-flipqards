@@ -8,8 +8,7 @@ import { HomePage } from './../pages/home/home';
 import { ListPage } from './../pages/list/list';
 import { Category } from './../entities/category';
 import { Card } from './../entities/card';
-import * as MockCategory from './../entities/category.mock.json';
-import * as MockCard from './../entities/card.mock.json';
+import { MockCards, MockCategories } from './../mock';
 
 @Component({
   templateUrl: 'app.html'
@@ -33,7 +32,6 @@ export class MyApp {
       { title: 'Übersicht', component: HomePage },
       { title: 'Kategorien', component: ListPage },
     ];
-
   }
 
   initializeApp() {
@@ -58,12 +56,13 @@ export class MyApp {
           ],
           dropSchema: true
         }).then((connection) => {
-          Promise.all(MockCategory.map(async (category) => {
+          Promise.all(MockCategories.map(async (category) => {
             return new Category(category).save();
-          })).then((res: Category[]) => {
-            Promise.all(MockCard.map(async (card) => {
+          })).then((res) => {
+            Promise.all(MockCards.map(async (card) => {
               return new Card(card[0], card[1], res[0]).save();
             })).then(res => {
+              console.log(res.length);
               this.nav.setRoot(ListPage);
             });
           });
