@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs/Rx';
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, ToastController, ActionSheetController, Platform } from 'ionic-angular';
 import { File } from '@ionic-native/file';
@@ -36,12 +35,6 @@ export class DetailsPage {
   }
 
   ionViewDidLoad() {
-    // Observable.interval(3000).subscribe(() => {
-    //   console.log(this.category.name);
-    //   getRepository(Category).findOneById(this.category.id).then(c => {
-    //     console.log(c);
-    //   });
-    // });
   }
 
   public addCards() {

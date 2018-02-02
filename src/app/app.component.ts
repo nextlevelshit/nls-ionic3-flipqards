@@ -48,24 +48,33 @@ export class MyApp {
           location: 'default',
           database: 'nls-flipcards',
           description: 'Production Database for NLS Flipcards',
-          logging: false,
+          logging: true,
           synchronize: true,
+          dropSchema: true,
           entities: [
             Category,
             Card
-          ],
-          dropSchema: true
+          ]
         }).then((connection) => {
-          Promise.all(MockCategories.map(async (category) => {
-            return new Category(category).save();
-          })).then((res) => {
-            Promise.all(MockCards.map(async (card) => {
-              return new Card(card[0], card[1], res[0]).save();
-            })).then(res => {
-              console.log(res.length);
-              this.nav.setRoot(ListPage);
+          Category.find()
+            .then(res => {
+              if(res.length > 0) {
+                this.nav.setRoot(ListPage);
+              } else {
+                Promise.all(MockCategories.map(async (category) => {
+                  return new Category(category).save();
+                })).then((res) => {
+                  Promise.all(MockCards.map(async (card) => {
+                    return new Card(card[0], card[1], res[0]).save();
+                  })).then(res => {
+                    this.nav.setRoot(ListPage);
+                  });
+                });
+              }
+            })
+            .catch(err => {
+              console.error(err);
             });
-          });
         });
       } else {
         await createConnection({
