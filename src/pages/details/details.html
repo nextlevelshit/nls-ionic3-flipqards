@@ -5,6 +5,14 @@
   </ion-header>
 
   <ion-content class="outer-content">
+    <ion-fab top right edge>
+      <button ion-fab mini><ion-icon name="add"></ion-icon></button>
+      <ion-fab-list>
+        <button ion-fab (click)="addCards()"><ion-icon name="create"></ion-icon></button>
+        <button ion-fab (click)="importCards()"><ion-icon name="download"></ion-icon></button>
+      </ion-fab-list>
+    </ion-fab>
+
     <div class="details">
       <ion-card>
         <ion-card-header>
@@ -26,16 +34,5 @@
       <p *ngIf="!cards" padding>
         Keine Lernkarten gefunden
       </p>
-      <ion-list>
-        <ion-list-header>
-          Weitere Funktionen
-        </ion-list-header>
-        <ion-item>
-          <button ion-button block large (click)="addCards()">Neue Karten hinzufügen</button>
-        </ion-item>
-        <ion-item>
-          <button ion-button block large (click)="importCards()">Karten importieren</button>
-        </ion-item>
-      </ion-list>
     </div>
   </ion-content>
