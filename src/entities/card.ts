@@ -19,7 +19,7 @@ export class Card extends BaseEntity {
   @Column({nullable: true, default: 0})
   wrong: number;
 
-  @Column({nullable: true, default: 0})
+  @Column({nullable: true, default: -1})
   strike: number;
 
   @ManyToOne(type => Category, category => category.cards)
@@ -27,10 +27,10 @@ export class Card extends BaseEntity {
   category: Category;
 
   @CreateDateColumn()
-  created_at: Date
+  created_at: Date;
 
   @UpdateDateColumn()
-  updated_at: Date
+  updated_at: Date;
 
   constructor (
     front: string,

@@ -3,7 +3,7 @@ export const MockCards = [
      "Welches sind mögliche Zäsuren für den **Beginn des Mittelalters**?","- **313**: Toleranzedikt von Mailand (xP) dem Kaiser Konstantin für das Christentum\n- **632**: Tod Mohammeds führt zur Expansion des islam. Glaubens"
   ],
   [
-     "Welches sind mögliche Zäsuren für das **Ende des Mittelalters**?","**1445/50**: Erfindung des Buchdrucks durch Gutenberg in Mainz\n– **1806**: Auflösung des Heiligen Römischen Reiches Deutscher Nation"
+     "Welches sind mögliche Zäsuren für das **Ende des Mittelalters**?","-**1445/50**: Erfindung des Buchdrucks durch Gutenberg in Mainz\n– **1806**: Auflösung des Heiligen Römischen Reiches Deutscher Nation"
   ],
   [
      "Wann war die größte Ausdehnung des Imperium Romanum?","**116** unter Kaiser Trajan *(98–117)*"

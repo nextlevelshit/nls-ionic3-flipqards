@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-
-import { Category } from './../../entities/category';
-import { Card } from './../../entities/card';
 import { Observable } from 'rxjs/Rx';
+
+import { Card } from './../../entities/card';
+import { Category } from './../../entities/category';
+import { Settings } from './../../entities/settings';
 
 @IonicPage()
 @Component({
@@ -56,30 +57,35 @@ export class LearningPage {
   cardState: string;
   clone: Card;
   algorithmicLearning: boolean;
-  sessionStart: Date;
-  sessionEnd: boolean;
+  sessionStart: Date = new Date();
+  sessionEnd: boolean = false;
   original: Card;
   stats;
+  settings: Settings|null = null;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams
   ) {
     this.category = this.navParams.get('category');
-    this.algorithmicLearning = true;
-    this.sessionStart = new Date();
-    this.sessionEnd = false;
-    this.flipped = false;
-    this.cloneCard();
-  }
-
-  ionViewDidLoad() {
     this.stats = {
       wrong: 0,
       correct: 0,
       total: this.category.cards.length,
       sessions: 0
     };
+    Settings.findOne().then(res => {
+      this.settings = res;
+
+      if(!this.settings.algorithmicLearning) {
+        this.cards = this.category.shuffledCards();
+      }
+      this.cloneCard();
+    });
+  }
+
+  ionViewDidLoad() {
+
   }
 
   public next(answer: boolean) {
@@ -93,8 +99,8 @@ export class LearningPage {
       this.cardState = 'swipeLeft';
     }
 
-    if(!this.algorithmicLearning) {
-      this.category.cards.shift();
+    if(!this.settings.algorithmicLearning) {
+      this.cards.shift();
     }
 
     Observable.interval(360).take(1).subscribe(() => {
@@ -106,32 +112,32 @@ export class LearningPage {
   /**
    * Show in template only the cloned card to avoid changing
    * properties of original Card entity
+   * @returns void
    */
   private cloneCard(): void {
-
-
     /**
      * Infinitely show new cards till user decides to quit
      * learning session manually
      */
-    if(this.algorithmicLearning) {
-      let sortedCards = this.category.cards.filter((a) => {
+    if(this.settings.algorithmicLearning) {
+      let sortedCards = this.category.shuffledCards().filter((a) => {
         return this.sessionStart.getTime() > a.updated_at.getTime();
       });
 
       if(sortedCards.length <= 0) {
-        sortedCards = this.category.cards;
+        sortedCards = this.category.shuffledCards();
         this.stats.sessions += 1;
         this.sessionStart = new Date();
       }
 
+      // Cluster cards by strikes and start with smallest ones
       sortedCards.sort((a, b) => {
         return a.strike - b.strike;
       });
 
       this.original = sortedCards[0];
     } else {
-      this.original = this.category.cards[0];
+      this.original = this.cards[0];
     }
 
     this.clone = Object.assign({}, this.original);
@@ -145,13 +151,12 @@ export class LearningPage {
       this.clone.front = this.original.back;
       this.clone.back = this.original.front;
     }
-
   }
 
   /**
    * Increase the amount of correctly answered Card and save
    * to database
-   * @param card
+   * @param Card
    * TODO: Move to Card entity
    */
   public increaseCorrect(card: Card) {
@@ -163,7 +168,7 @@ export class LearningPage {
   /**
    * Increase the amount of wrongly answered Card and save
    * to database
-   * @param card
+   * @param Card
    * TODO: Move to Card entity
    */
   public increaseWrong(card: Card) {

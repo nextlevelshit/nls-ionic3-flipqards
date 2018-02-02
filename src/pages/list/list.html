@@ -28,7 +28,7 @@
       </p>
     </ion-item>
   </ion-list>
-  <ion-list padding-top>
+  <ion-list padding-top *ngIf="false">
     <ion-list-header>
       Vorgeschlagene Kategorien
     </ion-list-header>
@@ -51,24 +51,24 @@
       <button ion-button outline item-end (click)="console.log('adding suggested category');">Hinzufügen</button>
     </ion-item>
   </ion-list>
-  <ion-list padding-top>
+  <ion-list padding-top *ngIf="settings">
     <ion-list-header>
       Konfiguration
     </ion-list-header>
     <ion-item>
       <ion-icon name="school" item-start></ion-icon>
       <ion-label>Algorythmisches Lernen</ion-label>
-      <ion-toggle color="primary"></ion-toggle>
+      <ion-toggle color="primary" [(ngModel)]="settings.algorithmicLearning" (ngModelChange)="settings.save()"></ion-toggle>
     </ion-item>
     <ion-item>
       <ion-icon name="settings" item-start></ion-icon>
       <ion-label>Automatisch synchronisieren</ion-label>
-      <ion-toggle color="primary"></ion-toggle>
+      <ion-toggle color="primary" [(ngModel)]="settings.synchronize" (ngModelChange)="settings.save()"></ion-toggle>
     </ion-item>
     <ion-item>
       <ion-icon name="stats" item-start></ion-icon>
       <ion-label>Statistik anzeigen</ion-label>
-      <ion-toggle color="primary"></ion-toggle>
+      <ion-toggle color="primary" [(ngModel)]="settings.stats" (ngModelChange)="settings.save()"></ion-toggle>
     </ion-item>
   </ion-list>
   <ion-list>

@@ -34,4 +34,14 @@ export class Category extends BaseEntity {
   static isValid(name) {
     return true;
   }
+
+  public shuffledCards() {
+    let cards = this.cards;
+    // fisher yates shuffle algorithm
+    for (let i = cards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cards[i], cards[j]] = [cards[j], cards[i]];
+    }
+    return cards;
+  }
 }

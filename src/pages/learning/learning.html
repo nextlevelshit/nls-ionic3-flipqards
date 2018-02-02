@@ -27,8 +27,8 @@
         <ion-label>Richtig</ion-label>
       </button>
     </div>
-    <ion-grid class="learning-stats">
-      <ion-row>
+    <ion-grid class="learning-stats" *ngIf="settings">
+      <ion-row *ngIf="settings.stats">
         <ion-col>
           <pre>{{stats|json}}</pre>
         </ion-col>

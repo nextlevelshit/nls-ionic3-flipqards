@@ -6,6 +6,7 @@ import { ToastController } from 'ionic-angular';
 import { Category } from './../../entities/category';
 import { DetailsPage } from './../details/details';
 import { LearningPage } from './../learning/learning';
+import { Settings } from './../../entities/settings';
 
 @Component({
   selector: 'page-list',
@@ -14,14 +15,18 @@ import { LearningPage } from './../learning/learning';
 export class ListPage {
   categories: Category[];
   count: number;
+  settings: Settings|null = null;
 
   constructor(
     public navCtrl: NavController,
     private alertCtrl: AlertController,
     private toastCtrl: ToastController
   ) {
-    Category.all().then(categories => {
-      this.categories = categories;
+    Category.all().then(res => {
+      this.categories = res;
+    });
+    Settings.findOne().then(res => {
+      this.settings = res;
     });
   }
 
@@ -74,7 +79,7 @@ export class ListPage {
     }).present();
   }
 
-  async updateCategories() {
+  private async updateCategories() {
     this.categories = await Category.all();
   }
 }

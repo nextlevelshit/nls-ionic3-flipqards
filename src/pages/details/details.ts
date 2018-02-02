@@ -102,6 +102,7 @@ export class DetailsPage {
         duration: 3000,
         position: 'bottom'
       }).present();
+
       this.updateCards();
 
       delete this.import;

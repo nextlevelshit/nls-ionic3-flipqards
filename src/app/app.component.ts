@@ -6,9 +6,10 @@ import { createConnection } from 'typeorm';
 
 import { HomePage } from './../pages/home/home';
 import { ListPage } from './../pages/list/list';
-import { Category } from './../entities/category';
 import { Card } from './../entities/card';
+import { Category } from './../entities/category';
 import { MockCards, MockCategories } from './../mock';
+import { Settings } from './../entities/settings';
 
 @Component({
   templateUrl: 'app.html'
@@ -49,31 +50,28 @@ export class MyApp {
           database: 'nls-flipcards',
           description: 'Production Database for NLS Flipcards',
           logging: true,
-          synchronize: true,
-          dropSchema: true,
+          synchronize: false,
+          dropSchema: false,
           entities: [
+            Card,
             Category,
-            Card
+            Settings
           ]
         }).then((connection) => {
-          Category.find()
+          Settings.findOne()
             .then(res => {
-              if(res.length > 0) {
-                this.nav.setRoot(ListPage);
-              } else {
-                Promise.all(MockCategories.map(async (category) => {
-                  return new Category(category).save();
-                })).then((res) => {
-                  Promise.all(MockCards.map(async (card) => {
-                    return new Card(card[0], card[1], res[0]).save();
-                  })).then(res => {
-                    this.nav.setRoot(ListPage);
+              if(!res) {
+                new Settings().save()
+                  .then(res => {
+                    this.checkForCategories();
+                  }).catch(err => {
+                    console.error(err);
                   });
-                });
+              } else {
+                this.checkForCategories();
               }
-            })
-            .catch(err => {
-              console.error(err);
+            }).catch(err => {
+              console.log(err);
             });
         });
       } else {
@@ -99,5 +97,31 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  private installMocks() {
+    Promise.all(MockCategories.map(async (category) => {
+      return new Category(category).save();
+    })).then((res) => {
+      Promise.all(MockCards.map(async (card) => {
+        return new Card(card[0], card[1], res[0]).save();
+      })).then(res => {
+        this.nav.setRoot(ListPage);
+      });
+    });
+  }
+
+  private checkForCategories() {
+    Category.find()
+    .then(res => {
+      if(res.length > 0) {
+        this.nav.setRoot(ListPage);
+      } else {
+        this.installMocks();
+      }
+    })
+    .catch(err => {
+      console.error(err);
+    });
   }
 }
