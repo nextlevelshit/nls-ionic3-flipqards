@@ -36,9 +36,6 @@ export class Category extends BaseEntity {
     return true;
   }
 
-  // static ratedCards(id) {
-  // }
-
   public shuffledCards() {
     let cards = this.cards;
     // Fisher-Yates shuffle algorithm
@@ -47,5 +44,26 @@ export class Category extends BaseEntity {
       [cards[i], cards[j]] = [cards[j], cards[i]];
     }
     return cards;
+  }
+
+  /**
+   * Pick next card from stack and choose selection based
+   * on user settings
+   * @param algorithmic
+   */
+
+  public pickCard(algorithmic: boolean = true) {
+    if (algorithmic) {
+      // If Algorithmic Learning is activated, next card
+      // will be picked from rated card stack
+      let rated = [].concat(...this.cards.map((card) =>
+        Array(Math.ceil(card.rate * 100)).fill(card)
+      ));
+      return rated[Math.floor(Math.random() * rated.length)];
+    } else {
+      // If Algorithmic Learning is deactivated, next
+      // card will be picked from shuffled cards stack
+      return this.shuffledCards()[0];
+    }
   }
 }

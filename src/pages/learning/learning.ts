@@ -52,11 +52,9 @@ import { Settings } from './../../entities/settings';
 })
 export class LearningPage {
   category: Category;
-  cards: Card[];
   flipped: boolean = false;
   cardState: string;
-  clone: Card;
-  algorithmicLearning: boolean;
+  clone: Card|null = null;
   sessionStart: Date = new Date();
   sessionEnd: boolean = false;
   original: Card;
@@ -69,44 +67,25 @@ export class LearningPage {
   ) {
     this.category = this.navParams.get('category');
     this.stats = {
-      wrong: 0,
-      correct: 0,
       total: this.category.cards.length,
-      sessions: 0
+      delta: 0,
+      count: 0,
+      card: null
     };
     Settings.findOne().then(res => {
       this.settings = res;
-
-      if(!this.settings.algorithmicLearning) {
-        this.cards = this.category.shuffledCards();
-      }
-
       this.cloneCard();
     });
   }
 
   ionViewDidLoad() {
-    // console.log(this.category.cards, this.category.shuffledCards());
-
-    // Category.ratedCards(this.category.id).then(cards => {
-    //   console.log(cards);
-    // });
   }
 
   public next(answer: boolean) {
-    this.original.updateStrike(answer);
-
-    if (answer) {
-      this.cardState = 'swipeRight';
-      this.increaseCorrect(this.original);
-    } else {
-      this.increaseWrong(this.original);
-      this.cardState = 'swipeLeft';
-    }
-
-    if(!this.settings.algorithmicLearning) {
-      this.cards.shift();
-    }
+    this.original.updateStats(answer);
+    this.cardState = answer ? 'swipeRight' : 'swipeLeft';
+    this.stats.delta = answer ? this.stats.delta + 1 : this.stats.delta - 1;
+    this.stats.count++;
 
     Observable.interval(360).take(1).subscribe(() => {
       this.cloneCard();
@@ -124,28 +103,17 @@ export class LearningPage {
      * Infinitely show new cards till user decides to quit
      * learning session manually
      */
-    if(this.settings.algorithmicLearning) {
-      let sortedCards = this.category.shuffledCards().filter((a) => {
-        return this.sessionStart.getTime() > a.updated_at.getTime();
-      });
-
-      if(sortedCards.length <= 0) {
-        sortedCards = this.category.shuffledCards();
-        this.stats.sessions += 1;
-        this.sessionStart = new Date();
-      }
-
-      // Cluster cards by strikes and start with smallest ones
-      sortedCards.sort((a, b) => {
-        return a.strike - b.strike;
-      });
-
-      this.original = sortedCards[0];
-    } else {
-      this.original = this.cards[0];
-    }
-
+    this.original = this.category.pickCard(this.settings.algorithmicLearning);
     this.clone = Object.assign({}, this.original);
+
+    this.stats.card = {
+      id: this.original.id,
+      front: this.original.front,
+      correct: this.original.correct,
+      wrong: this.original.wrong,
+      probability: this.original.rate,
+      strikes: this.original.strike
+    };
 
     /**
      * Switch backside and frontside if card has been flipped to show
@@ -156,29 +124,5 @@ export class LearningPage {
       this.clone.front = this.original.back;
       this.clone.back = this.original.front;
     }
-  }
-
-  /**
-   * Increase the amount of correctly answered Card and save
-   * to database
-   * @param Card
-   * TODO: Move to Card entity
-   */
-  public increaseCorrect(card: Card) {
-    this.stats.correct += 1;
-    card.correct += 1;
-    card.save();
-  }
-
-  /**
-   * Increase the amount of wrongly answered Card and save
-   * to database
-   * @param Card
-   * TODO: Move to Card entity
-   */
-  public increaseWrong(card: Card) {
-    this.stats.wrong += 1;
-    card.wrong += 1;
-    card.save();
   }
 }

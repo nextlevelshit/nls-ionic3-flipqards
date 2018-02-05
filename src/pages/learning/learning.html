@@ -6,7 +6,7 @@
 
 
 <ion-content padding>
-  <div class="learning" *ngIf="category.cards?.length > 0 || algorithmicLearning">
+  <div class="learning" *ngIf="clone">
     <div class="learning-card">
       <div class="learning-card-item" [ngClass]="{'--flipped': flipped}" [@card]="cardState" (click)="flipped=!flipped" *ngIf="clone">
         <div class="learning-card-item-front"
@@ -32,14 +32,10 @@
         <ion-col>
           <pre>{{stats|json}}</pre>
         </ion-col>
-        <ion-col>
-          <pre>{{original|json}}</pre>
-          <pre>{{original.rate|json}}</pre>
-        </ion-col>
       </ion-row>
     </ion-grid>
   </div>
-  <ion-title *ngIf="category.cards?.length === 0 || sessionEnd">
+  <ion-title *ngIf="sessionEnd">
     <h3>Du hast es geschafft</h3>
     <p>{{run.correct}} von {{run.total}} richtig</p>
   </ion-title>

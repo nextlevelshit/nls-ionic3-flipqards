@@ -47,8 +47,10 @@ export class Card extends BaseEntity {
     return this.correct + this.wrong;
   }
 
-  public updateStrike(answer: boolean) {
-    this.strike = (answer ? this.strike + 1 : 0);
+  public updateStats(answer: boolean) {
+    this.strike = answer ? this.strike + 1 : 0;
+    this.correct = answer ? this.correct + 1 : this.correct;
+    this.wrong = !answer ? this.wrong + 1 : this.wrong;
     this.save();
   }
 
