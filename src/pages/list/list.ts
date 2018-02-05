@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 
+import { Card } from './../../entities/card';
 import { Category } from './../../entities/category';
 import { DetailsPage } from './../details/details';
 import { LearningPage } from './../learning/learning';
@@ -31,6 +32,9 @@ export class ListPage {
   }
 
   ionViewDidLoad() {
+    Card.find().then(cards => {
+      console.log(cards)
+    });
   }
 
   public categorySelected(e, id) {

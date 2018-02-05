@@ -50,8 +50,8 @@ export class MyApp {
           database: 'nls-flipcards',
           description: 'Production Database for NLS Flipcards',
           logging: true,
-          synchronize: false,
-          dropSchema: false,
+          synchronize: true,
+          dropSchema: true,
           entities: [
             Card,
             Category,

@@ -80,12 +80,17 @@ export class LearningPage {
       if(!this.settings.algorithmicLearning) {
         this.cards = this.category.shuffledCards();
       }
+
       this.cloneCard();
     });
   }
 
   ionViewDidLoad() {
+    // console.log(this.category.cards, this.category.shuffledCards());
 
+    // Category.ratedCards(this.category.id).then(cards => {
+    //   console.log(cards);
+    // });
   }
 
   public next(answer: boolean) {
