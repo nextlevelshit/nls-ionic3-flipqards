@@ -19,13 +19,6 @@ export class Category extends BaseEntity {
     this.name = name;
   }
 
-  static all() {
-    return this.createQueryBuilder('category')
-      .innerJoinAndSelect('category.cards', 'cards')
-      .orderBy('category.name')
-      .getMany();
-  }
-
   static findByName(name: string) {
     return this.createQueryBuilder('category')
       .where('category.name = :name', { name })
@@ -33,7 +26,7 @@ export class Category extends BaseEntity {
   }
 
   static isValid(name) {
-    return true;
+    return name.length > 2 ? true : false;
   }
 
   public shuffledCards() {

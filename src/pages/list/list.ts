@@ -23,18 +23,13 @@ export class ListPage {
     private alertCtrl: AlertController,
     private toastCtrl: ToastController
   ) {
-    Category.all().then(res => {
-      this.categories = res;
-    });
+    this.getCategories();
     Settings.findOne().then(res => {
       this.settings = res;
     });
   }
 
   ionViewDidLoad() {
-    Card.find().then(cards => {
-      console.log(cards)
-    });
   }
 
   public categorySelected(e, id) {
@@ -50,7 +45,7 @@ export class ListPage {
   public addCategory(message?) {
     this.alertCtrl.create({
       title: 'Neue Kategorie',
-      subTitle: message ? message : '',
+      message: message ? message : 'Füge eine neue Lernkategorie hinzu.',
       inputs: [
         {
           name: 'name',
@@ -67,7 +62,7 @@ export class ListPage {
           handler: data => {
             if (Category.isValid(data.name)) {
               new Category(data.name).save().then(result => {
-                this.updateCategories();
+                this.getCategories();
                 this.toastCtrl.create({
                   message: `${data.name} wurde hinzugefügt`,
                   duration: 3000,
@@ -75,7 +70,7 @@ export class ListPage {
                 }).present();
               });
             } else {
-              this.addCategory('Ungültiger Name');
+              this.addCategory('Die Kategorie sollte mindestens 3 Zeichen umfassen.');
             }
           }
         }
@@ -83,7 +78,9 @@ export class ListPage {
     }).present();
   }
 
-  private async updateCategories() {
-    this.categories = await Category.all();
+  private getCategories() {
+    Category.find().then(res => {
+      this.categories = res;
+    });
   }
 }

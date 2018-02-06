@@ -67,7 +67,7 @@
       <ion-label>Algorythmisches Lernen</ion-label>
       <ion-toggle color="primary" [(ngModel)]="settings.algorithmicLearning" (ngModelChange)="settings.save()"></ion-toggle>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="false">
       <ion-icon name="settings" item-start></ion-icon>
       <ion-label>Automatisch synchronisieren</ion-label>
       <ion-toggle color="primary" [(ngModel)]="settings.synchronize" (ngModelChange)="settings.save()"></ion-toggle>
