@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Lernkarte bearbeiten</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-fab bottom right>
+    <button ion-fab (click)="save()"><ion-icon name="checkmark"></ion-icon></button>
+  </ion-fab>
+
+  <ion-list inset>
+    <ion-item>
+      <ion-label stacked>Frage <small>Vorderseite</small></ion-label>
+      <ion-textarea type="text" rows="6" [(ngModel)]="card.front" (change)="changed=true"></ion-textarea>
+    </ion-item>
+
+    <ion-item margin-top>
+      <ion-label stacked>Antwort <small>Rückseite</small></ion-label>
+      <ion-textarea type="text" rows="6" [(ngModel)]="card.back" (change)="changed=true"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <p>
+        <small>Formattierung: *Kursiv*, **Fett** <a href="#">Ganze List anzeigen</a></small>
+      </p>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

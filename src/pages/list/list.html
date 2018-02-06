@@ -1,15 +1,18 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Kategorien</ion-title>
+    <ion-title>Lernkategorien</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addCategory()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
+
 <ion-content class="outer-content">
-  <ion-fab bottom right>
-    <button ion-fab mini (click)="addCategory()"><ion-icon name="add"></ion-icon></button>
-  </ion-fab>
 
   <ion-list *ngIf="categories?.length > 0" padding-top>
     <!-- <ion-list-header>

@@ -11,6 +11,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 
 import { DetailsPage } from './../pages/details/details';
+import { EditPage } from './../pages/edit/edit';
 import { HomePage } from '../pages/home/home';
 import { LearningPage } from './../pages/learning/learning';
 import { ListPage } from '../pages/list/list';
@@ -21,6 +22,7 @@ import { MarkdownPipe } from './../pipes/markdown.pipe';
   declarations: [
     MyApp,
     DetailsPage,
+    EditPage,
     HomePage,
     LearningPage,
     ListPage,
@@ -35,6 +37,7 @@ import { MarkdownPipe } from './../pipes/markdown.pipe';
   entryComponents: [
     MyApp,
     DetailsPage,
+    EditPage,
     HomePage,
     ListPage,
     LearningPage

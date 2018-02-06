@@ -57,4 +57,8 @@ export class Card extends BaseEntity {
   public get rate() {
     return Math.pow(1 / Math.E, (this.strike + (this.correct - this.wrong) / 100));
   }
+
+  public get isValid() {
+    return true;
+  }
 }

@@ -8,6 +8,7 @@ import * as papa from 'papaparse';
 
 import { Category } from './../../entities/category';
 import { Card } from './../../entities/card';
+import { EditPage } from './../edit/edit';
 
 @Component({
   selector: 'page-details',
@@ -129,7 +130,7 @@ export class DetailsPage {
           text: 'Bearbeiten',
           icon: !this.platform.is('ios') ? 'hammer' : null,
           handler: () => {
-            console.log('Editing', card);
+            this.navCtrl.push(EditPage, {card: card, category: this.category});
           }
         },{
           text: 'Löschen',

@@ -40,8 +40,10 @@ export class MyApp {
     this.platform.ready().then(async () => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      this.statusBar.styleLightContent();
+      this.statusBar.backgroundColorByHexString('#9d1141');
+      // TODO: use overlay webview, though add padding to toolbar and navbar
+      // this.statusBar.overlaysWebView(true);
 
       if(this.platform.is('cordova')) {
         await createConnection({
@@ -106,6 +108,7 @@ export class MyApp {
       Promise.all(MockCards.map(async (card) => {
         return new Card(card[0], card[1], res[0]).save();
       })).then(res => {
+        this.splashScreen.hide();
         this.nav.setRoot(ListPage);
       });
     });
@@ -115,6 +118,7 @@ export class MyApp {
     Category.find()
     .then(res => {
       if(res.length > 0) {
+        this.splashScreen.hide();
         this.nav.setRoot(ListPage);
       } else {
         this.installMocks();
