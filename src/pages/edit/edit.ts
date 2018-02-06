@@ -28,8 +28,6 @@ export class EditPage {
   ) {
     this.card = this.navParams.get('card');
     this.category = this.navParams.get('category');
-
-    console.log(this.navCtrl.getPrevious);
   }
 
   // TODO: Request for confirmation BEFORE user exits this view
@@ -72,7 +70,7 @@ export class EditPage {
       });
     } else {
       this.toastCtrl.create({
-        message: `Lernkarte konnte nicht gespeichert werden. Bitte überprüfe deine Eingabe. Beide Felder müssen ausgefüllt sein`,
+        message: `Lernkarte konnte nicht gespeichert werden. Beide Felder müssen ausgefüllt sein.`,
         duration: 3000,
         position: 'bottom'
       }).present();

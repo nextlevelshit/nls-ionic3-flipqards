@@ -6,6 +6,7 @@ import { FilePath } from '@ionic-native/file-path';
 import { getRepository } from 'typeorm';
 import * as papa from 'papaparse';
 
+import { AddPage } from './../add/add';
 import { Category } from './../../entities/category';
 import { Card } from './../../entities/card';
 import { EditPage } from './../edit/edit';
@@ -18,7 +19,7 @@ import { EditPage } from './../edit/edit';
 export class DetailsPage {
   category: Category;
   import: Array<string>;
-  cards: Card[];
+  cards: Card[]|null = null;
 
   constructor(
     public platform: Platform,
@@ -32,16 +33,14 @@ export class DetailsPage {
     private filePath: FilePath
   ) {
     this.category = this.navParams.get('category');
-    this.updateCards();
   }
 
   ionViewDidLoad() {
+    this.updateCards();
   }
 
   public addCards() {
-    new Card('Test 1', 'Rückseite 1', this.category).save().then(() => {
-      this.updateCards();
-    });
+    this.navCtrl.push(AddPage, {category: this.category});
   }
 
   public importCards() {
@@ -117,9 +116,10 @@ export class DetailsPage {
   }
 
   private updateCards() {
-    getRepository(Category).findOneById(this.category.id).then(category => {
-      this.cards = category.cards;
-    });
+    console.log(this.category);
+    // Category.findOneById(this.category.id, {relations: ['cards']}).then(category => {
+    //   this.cards = category.cards;
+    // });
   }
 
   public cardSelected(card: Card) {

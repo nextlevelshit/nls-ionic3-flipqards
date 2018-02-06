@@ -10,6 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 
+import { AddPage } from './../pages/add/add';
 import { DetailsPage } from './../pages/details/details';
 import { EditPage } from './../pages/edit/edit';
 import { HomePage } from '../pages/home/home';
@@ -21,6 +22,7 @@ import { MarkdownPipe } from './../pipes/markdown.pipe';
 @NgModule({
   declarations: [
     MyApp,
+    AddPage,
     DetailsPage,
     EditPage,
     HomePage,
@@ -36,6 +38,7 @@ import { MarkdownPipe } from './../pipes/markdown.pipe';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    AddPage,
     DetailsPage,
     EditPage,
     HomePage,

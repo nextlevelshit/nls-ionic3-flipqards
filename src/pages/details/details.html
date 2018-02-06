@@ -1,32 +1,35 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>{{category.name}} bearbeiten</ion-title>
+    <ion-title>Kategorie bearbeiten</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addCards()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="outer-content">
   <ion-fab bottom right>
-    <button ion-fab mini><ion-icon name="add"></ion-icon></button>
-    <ion-fab-list>
-      <button ion-fab (click)="addCards()"><ion-icon name="create"></ion-icon></button>
+    <button ion-fab><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list side="top">
       <button ion-fab (click)="importCards()"><ion-icon name="download"></ion-icon></button>
+      <button ion-fab (click)="addCards()"><ion-icon name="create"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>
 
-  <div class="details">
-    <ion-card>
-      <ion-card-header>
-        {{category.name}}
-      </ion-card-header>
-      <ion-card-content>
-        Meta informationen
-      </ion-card-content>
-    </ion-card>
-    <ion-list margin-top *ngIf="cards?.length > 0">
+  <div class="details" *ngIf="category.cards?.length > 0">
+    <div padding>
+      <h2>{{category.name}}</h2>
+      <p padding-bottom>
+        <small>{{category.cards.length}} Lernkarten</small>
+      </p>
+    </div>
+    <ion-list margin-top>
       <ion-list-header>
         Lernkarten
       </ion-list-header>
-      <ion-item *ngFor="let card of cards" (click)="cardSelected(card)">
+      <ion-item *ngFor="let card of category.cards" (click)="cardSelected(card)">
         <h2>{{card.front}}</h2>
         <p>{{card.back}}</p>
       </ion-item>
@@ -34,5 +37,8 @@
     <p *ngIf="!cards" padding>
       Keine Lernkarten gefunden
     </p>
+  </div>
+  <div padding *ngIf="!category.cards">
+    <p>Lernkarten werden geladen ...</p>
   </div>
 </ion-content>
