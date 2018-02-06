@@ -28,40 +28,41 @@ export class EditPage {
   ) {
     this.card = this.navParams.get('card');
     this.category = this.navParams.get('category');
+
+    console.log(this.navCtrl.getPrevious);
   }
 
-  ionViewDidLoad() {
-  }
-
-  ionViewWillLeave() {
-    if(this.changed) {
-      this.alertCtrl.create({
-        title: 'Wirklich schließen?',
-        message: 'Deine Änderung gehen verloren, wenn du sie nicht vorher abspeicherst',
-        buttons: [
-          {
-            text: 'Nicht speichern',
-            handler: () => {
-              this.goBack();
-            }
-          },
-          {
-            text: 'Abbrechen',
-            role: 'cancel'
-          },
-          {
-            text: 'Speichern',
-            handler: () => {
-              this.save();
-            }
-          }
-        ]
-      }).present();
-    }
-  }
+  // TODO: Request for confirmation BEFORE user exits this view
+  // ionViewWillUnload() {
+  //   if(this.changed) {
+  //     this.alertCtrl.create({
+  //       title: 'Wirklich schließen?',
+  //       message: 'Deine Änderung gehen verloren, wenn du sie nicht vorher abspeicherst',
+  //       buttons: [
+  //         {
+  //           text: 'Nicht speichern',
+  //           handler: () => {
+  //             this.goBack();
+  //           }
+  //         },
+  //         {
+  //           text: 'Abbrechen',
+  //           role: 'cancel'
+  //         },
+  //         {
+  //           text: 'Speichern',
+  //           handler: () => {
+  //             this.changed = false;
+  //             this.save();
+  //           }
+  //         }
+  //       ]
+  //     }).present();
+  //   }
+  // }
 
   private goBack() {
-    this.navCtrl.push(DetailsPage, { category: this.category });
+    this.navCtrl.pop();
   }
 
   public save() {

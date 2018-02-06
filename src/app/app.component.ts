@@ -116,16 +116,16 @@ export class MyApp {
 
   private checkForCategories() {
     Category.find()
-    .then(res => {
-      if(res.length > 0) {
-        this.splashScreen.hide();
-        this.nav.setRoot(ListPage);
-      } else {
-        this.installMocks();
-      }
-    })
-    .catch(err => {
-      console.error(err);
-    });
+      .then(res => {
+        if(res.length > 0) {
+          this.splashScreen.hide();
+          this.nav.setRoot(ListPage);
+        } else {
+          this.installMocks();
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
 }
