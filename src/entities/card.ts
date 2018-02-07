@@ -22,6 +22,9 @@ export class Card extends BaseEntity {
   @Column({nullable: true, default: -1})
   strike: number;
 
+  @Column({nullable: true})
+  seen_at: Date;
+
   @ManyToOne(type => Category, category => category.cards)
   @JoinColumn()
   category: Category;
@@ -51,6 +54,7 @@ export class Card extends BaseEntity {
     this.strike = answer ? this.strike + 1 : 0;
     this.correct = answer ? this.correct + 1 : this.correct;
     this.wrong = !answer ? this.wrong + 1 : this.wrong;
+    this.seen_at = new Date();
     this.save();
   }
 

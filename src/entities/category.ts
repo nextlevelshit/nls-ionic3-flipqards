@@ -29,6 +29,14 @@ export class Category extends BaseEntity {
     return name.length > 2 ? true : false;
   }
 
+  public get lastSeen() {
+    if (!this.cards.length) return null;
+
+    return this.cards.reduce((a, b) => {
+      return a.seen_at > b.seen_at ? a : b;
+    }).seen_at;
+  }
+
   public shuffledCards() {
     let cards = this.cards;
     // Fisher-Yates shuffle algorithm

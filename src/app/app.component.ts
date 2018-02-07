@@ -27,7 +27,7 @@ export class MyApp {
     public splashScreen: SplashScreen
   ) {
     this.initializeApp();
-
+    this.splashScreen.show();
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Übersicht', component: HomePage },
@@ -108,7 +108,6 @@ export class MyApp {
       Promise.all(MockCards.map(async (card) => {
         return new Card(card[0], card[1], res[0]).save();
       })).then(res => {
-        this.splashScreen.hide();
         this.nav.setRoot(ListPage);
       });
     });
@@ -118,7 +117,6 @@ export class MyApp {
     Category.find()
       .then(res => {
         if(res.length > 0) {
-          this.splashScreen.hide();
           this.nav.setRoot(ListPage);
         } else {
           this.installMocks();

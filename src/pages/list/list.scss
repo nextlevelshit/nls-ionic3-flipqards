@@ -1,3 +1,19 @@
-page-list {
+.list {
+  &-avatar {
+    &-inner {
+      background: linear-gradient(color($colors, 'primary'), darken(color($colors, 'primary'), 10%));
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      color: $background-color;
 
+      &:after {
+        content: '';
+        display: block;
+        padding-bottom: 100%;
+      }
+    }
+  }
 }

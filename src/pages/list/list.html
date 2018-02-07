@@ -19,9 +19,17 @@
       Meine Kategorien
     </ion-list-header> -->
     <ion-item *ngFor="let category of categories">
-      <ion-label (click)="categorySelected($event, category.id)">
+      <ion-badge item-start></ion-badge>
+      <ion-avatar item-start class="list-avatar">
+        <div class="list-avatar-inner">
+          {{category.cards?.length}}
+        </div>
+      </ion-avatar>
+      <h2 (click)="categorySelected($event, category.id)">
         {{category.name}}
-      </ion-label>
+      </h2>
+      <p *ngIf="!category.lastSeen">Noch nicht wiederholt</p>
+      <p *ngIf="category.lastSeen">{{category.lastSeen | fromNow}}</p>
       <button ion-button outline item-end color="dark" (click)="editCategory($event, category)">Bearbeiten</button>
     </ion-item>
   </ion-list>

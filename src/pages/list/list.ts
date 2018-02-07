@@ -1,3 +1,4 @@
+import { SplashScreen } from '@ionic-native/splash-screen';
 import { AlertController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
@@ -21,15 +22,18 @@ export class ListPage {
   constructor(
     public navCtrl: NavController,
     private alertCtrl: AlertController,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private splashScreen: SplashScreen
   ) {
-    this.getCategories();
     Settings.findOne().then(res => {
       this.settings = res;
     });
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
+    // this.splashScreen.show();
+    this.splashScreen.hide();
+    this.getCategories();
   }
 
   public categorySelected(e, id) {
