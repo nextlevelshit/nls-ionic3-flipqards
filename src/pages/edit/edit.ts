@@ -63,7 +63,7 @@ export class EditPage {
     this.navCtrl.pop();
   }
 
-  public save() {
+  public clickedSave() {
     if(this.card.isValid) {
       this.card.save().then(res => {
         this.goBack();

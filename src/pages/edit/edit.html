@@ -1,14 +1,15 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>Lernkarte bearbeiten</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="save()">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
-  <ion-fab bottom right>
-    <button ion-fab (click)="save()"><ion-icon name="checkmark"></ion-icon></button>
-  </ion-fab>
 
   <ion-list inset>
     <ion-item>
@@ -21,11 +22,18 @@
       <ion-textarea type="text" rows="6" [(ngModel)]="card.back" (change)="changed=true"></ion-textarea>
     </ion-item>
 
-    <ion-item>
+    <!-- <ion-item>
       <p>
         <small>Formattierung: *Kursiv*, **Fett** <a href="#">Ganze List anzeigen</a></small>
       </p>
-    </ion-item>
+    </ion-item> -->
 
   </ion-list>
+
+  <div class="add-actions" padding margin-top>
+    <button ion-button icon-start float-right color="primary" (click)="clickedSave()">
+      <ion-icon name="checkmark" item-start></ion-icon>
+      <ion-label>Speichern</ion-label>
+    </button>
+  </div>
 </ion-content>

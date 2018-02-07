@@ -35,7 +35,7 @@ export class DetailsPage {
     this.category = this.navParams.get('category');
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.updateCards();
   }
 
@@ -116,7 +116,10 @@ export class DetailsPage {
   }
 
   private updateCards() {
-    console.log(this.category);
+    Category.findOneById(this.category.id).then(res => {
+      // console.log(res);
+      this.category = res;
+    });
     // Category.findOneById(this.category.id, {relations: ['cards']}).then(category => {
     //   this.cards = category.cards;
     // });
@@ -137,7 +140,8 @@ export class DetailsPage {
           icon: !this.platform.is('ios') ? 'trash' : null,
           handler: () => {
             this.alertCtrl.create({
-              title: 'Lernkarte wirklich löschen',
+              title: 'Lernkarte löschen',
+              message: 'Bist du dir sicher? Die Karte wird unwiederbringlich gelöscht.',
               buttons: [
                 {
                   text: 'Abbrechen',

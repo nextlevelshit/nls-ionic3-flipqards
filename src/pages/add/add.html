@@ -1,40 +1,41 @@
 <ion-header>
-    <ion-navbar color="primary">
-      <ion-title>Lernkarte erstellen</ion-title>
-    </ion-navbar>
-  </ion-header>
-
-  <ion-content>
-
-    <!-- <ion-fab bottom right>
-      <button ion-fab (click)="save()"><ion-icon name="checkmark"></ion-icon></button>
-    </ion-fab> -->
-
-    <ion-list>
-      <ion-item>
-        <ion-label stacked>Frage <small>Vorderseite</small></ion-label>
-        <ion-textarea type="text" rows="6" [(ngModel)]="card.front" (change)="changed=true"></ion-textarea>
-      </ion-item>
-
-      <ion-item margin-top>
-        <ion-label stacked>Antwort <small>Rückseite</small></ion-label>
-        <ion-textarea type="text" rows="6" [(ngModel)]="card.back" (change)="changed=true"></ion-textarea>
-      </ion-item>
-      <!-- <ion-item>
-        <p>
-          <small>Formattierung: *Kursiv*, **Fett** <a href="#">Ganze List anzeigen</a></small>
-        </p>
-      </ion-item> -->
-      <ion-item>
-        <ion-label><small>Nach dem Speichern nächste Karte erstellen</small></ion-label>
-        <ion-toggle color="primary" [(ngModel)]="returnAfterSave"></ion-toggle>
-      </ion-item>
-    </ion-list>
-
-    <div class="add-actions" padding margin-top>
-      <button ion-button icon-start float-right color="primary" (click)="clickedSave()">
-        <ion-icon name="checkmark" item-start></ion-icon>
-        <ion-label>Speichern</ion-label>
+  <ion-navbar color="primary">
+    <ion-title>Lernkarte erstellen</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="clickedSave()">
+        <ion-icon name="checkmark"></ion-icon>
       </button>
-    </div>
-  </ion-content>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item>
+      <ion-label stacked>Frage <small>Vorderseite</small></ion-label>
+      <ion-textarea type="text" rows="6" [(ngModel)]="card.front" (change)="changed=true"></ion-textarea>
+    </ion-item>
+
+    <ion-item margin-top>
+      <ion-label stacked>Antwort <small>Rückseite</small></ion-label>
+      <ion-textarea type="text" rows="6" [(ngModel)]="card.back" (change)="changed=true"></ion-textarea>
+    </ion-item>
+    <!-- <ion-item>
+      <p>
+        <small>Formattierung: *Kursiv*, **Fett** <a href="#">Ganze List anzeigen</a></small>
+      </p>
+    </ion-item> -->
+    <ion-item>
+      <ion-label><small>Nach dem Speichern nächste Karte erstellen</small></ion-label>
+      <ion-toggle color="primary" [(ngModel)]="returnAfterSave"></ion-toggle>
+    </ion-item>
+  </ion-list>
+
+  <div class="add-actions" padding margin-top>
+    <button ion-button icon-start float-right color="primary" (click)="clickedSave()">
+      <ion-icon name="checkmark" item-start></ion-icon>
+      <ion-label>Speichern</ion-label>
+    </button>
+  </div>
+</ion-content>
