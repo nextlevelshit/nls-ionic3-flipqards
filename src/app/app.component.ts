@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { createConnection } from 'typeorm';
 
-// import { ENV } from '@env';
+import { ENV } from '@env';
 import { HomePage } from '@pages/home/home';
 import { ListPage } from '@pages/list/list';
 import { Card } from '@entities/card';
@@ -49,19 +49,7 @@ export class MyApp {
       // this.statusBar.overlaysWebView(true);
 
       if(this.platform.is('cordova')) {
-        await createConnection({
-          type: 'cordova',
-          location: 'default',
-          database: 'nls-flipcards',
-          logging: false,
-          synchronize: true,
-          dropSchema: true,
-          entities: [
-            Card,
-            Category,
-            Settings
-          ]
-        }).then((connection) => {
+        await createConnection(ENV.connection.cordova).then((connection) => {
           Settings.findOne()
             .then(res => {
               if(!res) {
@@ -79,20 +67,7 @@ export class MyApp {
             });
         });
       } else {
-        await createConnection({
-          type: 'websql',
-          database: 'nls-flipcards',
-          description: 'Development Database for NLS Flipcards',
-          version: '1',
-          size: 2097152,
-          logging: true,
-          synchronize: true,
-          entities: [
-            Category,
-            Card
-          ],
-          dropSchema: true
-        });
+        await createConnection(ENV.connection.websql);
       }
     });
   }

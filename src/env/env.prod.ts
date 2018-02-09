@@ -5,8 +5,8 @@ import { Category } from '@entities/category';
 import { Settings } from '@entities/settings';
 
 export const ENV: EnvInterface = {
-  production: false,
-  isDebugMode: true,
+  production: true,
+  isDebugMode: false,
   connection: {
     cordova: {
       type: 'cordova',
@@ -35,4 +35,5 @@ export const ENV: EnvInterface = {
       ],
       dropSchema: true
     }
+  }
 };

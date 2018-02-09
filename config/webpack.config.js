@@ -78,7 +78,7 @@ const devConfig = {
     alias: {
       "@app": path.resolve('./src/app/'),
       "@assets": path.resolve('./src/assets/'),
-      "@env": path.resolve(`./src/env/env.dev.ts`),
+      "@env": path.resolve(`./src/env/env.ts`),
       "@pages": path.resolve('./src/pages/'),
       "@pipes": path.resolve('./src/pipes/'),
       "@mock": path.resolve('./src/mock.ts'),
@@ -133,7 +133,7 @@ const prodConfig = {
     alias: {
       "@app": path.resolve('./src/app/'),
       "@assets": path.resolve('./src/assets/'),
-      "@env": path.resolve(`./src/env/env.ts`),
+      "@env": path.resolve(`./src/env/env.prod.ts`),
       "@pages": path.resolve('./src/pages/'),
       "@pipes": path.resolve('./src/pipes/'),
       "@mock": path.resolve('./src/mock.ts'),

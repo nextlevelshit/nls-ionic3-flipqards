@@ -1,4 +1,8 @@
 export interface EnvInterface {
   production: boolean,
-  isDebugMode: boolean;
+  isDebugMode: boolean,
+  connection: {
+    cordova,
+    websql
+  }
 }

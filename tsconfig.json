@@ -17,7 +17,7 @@
     "paths": {
       "@app/*": [ "app/*" ],
       "@assets/*": [ "assets/*" ],
-      "@env": [ "env" ],
+      "@env": [ "env/env" ],
       "@pages/*": [ "pages/*" ],
       "@pipes/*": [ "pipes/*" ],
       "@mock": [ "mock" ],
