@@ -1,15 +1,16 @@
+// Libraries
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, ToastController, ActionSheetController, Platform } from 'ionic-angular';
 import { File } from '@ionic-native/file';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
-import { getRepository } from 'typeorm';
 import * as papa from 'papaparse';
-
-import { AddPage } from './../add/add';
-import { Category } from './../../entities/category';
-import { Card } from './../../entities/card';
-import { EditPage } from './../edit/edit';
+// Entities
+import { Category } from '@entities/category';
+import { Card } from '@entities/card';
+// Pages
+import { AddPage } from '@pages/add/add';
+import { EditPage } from '@pages/edit/edit';
 
 @Component({
   selector: 'page-details',
@@ -117,12 +118,8 @@ export class DetailsPage {
 
   private updateCards() {
     Category.findOneById(this.category.id).then(res => {
-      // console.log(res);
       this.category = res;
     });
-    // Category.findOneById(this.category.id, {relations: ['cards']}).then(category => {
-    //   this.cards = category.cards;
-    // });
   }
 
   public cardSelected(card: Card) {

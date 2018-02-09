@@ -4,12 +4,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { createConnection } from 'typeorm';
 
-import { HomePage } from './../pages/home/home';
-import { ListPage } from './../pages/list/list';
-import { Card } from './../entities/card';
-import { Category } from './../entities/category';
-import { MockCards, MockCategories } from './../mock';
-import { Settings } from './../entities/settings';
+// import { ENV } from '@env';
+import { HomePage } from '@pages/home/home';
+import { ListPage } from '@pages/list/list';
+import { Card } from '@entities/card';
+import { Category } from '@entities/category';
+import { MockCards, MockCategories } from '@mock';
+import { Settings } from '@entities/settings';
 
 @Component({
   templateUrl: 'app.html'
@@ -37,6 +38,8 @@ export class MyApp {
 
   initializeApp() {
 
+    // console.log(ENV);
+
     this.platform.ready().then(async () => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -50,8 +53,7 @@ export class MyApp {
           type: 'cordova',
           location: 'default',
           database: 'nls-flipcards',
-          description: 'Production Database for NLS Flipcards',
-          logging: true,
+          logging: false,
           synchronize: true,
           dropSchema: true,
           entities: [

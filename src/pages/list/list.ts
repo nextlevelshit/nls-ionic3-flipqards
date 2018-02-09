@@ -1,14 +1,15 @@
+// Libraries
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AlertController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
-
-import { Card } from './../../entities/card';
-import { Category } from './../../entities/category';
-import { DetailsPage } from './../details/details';
-import { LearningPage } from './../learning/learning';
-import { Settings } from './../../entities/settings';
+// Entities
+import { Category } from '@entities/category';
+import { Settings } from '@entities/settings';
+// Pages
+import { DetailsPage } from '@pages/details/details';
+import { LearningPage } from '@pages/learning/learning';
 
 @Component({
   selector: 'page-list',

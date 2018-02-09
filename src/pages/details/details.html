@@ -21,8 +21,10 @@
   <div class="details" *ngIf="category.cards?.length > 0">
     <div padding>
       <h2>{{category.name}}</h2>
-      <p padding-bottom>
+      <p>
         <small>{{category.cards.length}} Lernkarten</small>
+        <small *ngIf="category.lastSeen"> · {{category.lastSeen | fromNow}} zuletzt wiederholt</small>
+        <small> · am {{category.cards.updated_at | date}} bearbeitet</small>
       </p>
     </div>
     <ion-list margin-top>

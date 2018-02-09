@@ -7,14 +7,17 @@
  * https://webpack.js.org/configuration/
  */
 
-var path = require('path');
-var webpack = require('webpack');
-var ionicWebpackFactory = require(process.env.IONIC_WEBPACK_FACTORY);
+const path = require('path');
+const webpack = require('webpack');
+const ionicWebpackFactory = require(process.env.IONIC_WEBPACK_FACTORY);
 
-var ModuleConcatPlugin = require('webpack/lib/optimize/ModuleConcatenationPlugin');
-var PurifyPlugin = require('@angular-devkit/build-optimizer').PurifyPlugin;
+const ModuleConcatPlugin = require('webpack/lib/optimize/ModuleConcatenationPlugin');
+const PurifyPlugin = require('@angular-devkit/build-optimizer').PurifyPlugin;
+const ENV = process.env.IONIC_ENV;
 
-var optimizedProdLoaders = [
+// console.log(process.env.IONIC_WEBPACK_FACTORY);
+
+const optimizedProdLoaders = [
   {
     test: /\.json$/,
     loader: 'json-loader'
@@ -25,7 +28,6 @@ var optimizedProdLoaders = [
       {
         loader: process.env.IONIC_CACHE_LOADER
       },
-
       {
         loader: '@angular-devkit/build-optimizer/webpack-loader',
         options: {
@@ -62,7 +64,7 @@ function getProdLoaders() {
   return devConfig.module.loaders;
 }
 
-var devConfig = {
+const devConfig = {
   entry: process.env.IONIC_APP_ENTRY_POINT,
   output: {
     path: '{{BUILD}}',
@@ -74,7 +76,17 @@ var devConfig = {
 
   resolve: {
     extensions: ['.ts', '.js', '.json'],
-    modules: [path.resolve('node_modules')]
+    modules: [path.resolve('node_modules')],
+    alias: {
+      "@app": path.resolve('./src/app/'),
+      "@assets": path.resolve('./src/assets/'),
+      "@env": path.resolve(`./src/env/env.dev.ts`),
+      "@pages": path.resolve('./src/pages/'),
+      "@pipes": path.resolve('./src/pipes/'),
+      "@mock": path.resolve('./src/mock.ts'),
+      "@theme": path.resolve('./src/theme/'),
+      "@entities": path.resolve('./src/entities/'),
+    }
   },
 
   module: {
@@ -94,7 +106,7 @@ var devConfig = {
     ionicWebpackFactory.getIonicEnvironmentPlugin(),
     ionicWebpackFactory.getCommonChunksPlugin(),
     new webpack.NormalModuleReplacementPlugin(/typeorm$/, function (result) {
-      result.request = result.request.replace(/typeorm/, "typeorm/browser");
+      result.request = result.request.replace(/typeorm/, 'typeorm/browser');
     })
   ],
 
@@ -107,7 +119,7 @@ var devConfig = {
   }
 };
 
-var prodConfig = {
+const prodConfig = {
   entry: process.env.IONIC_APP_ENTRY_POINT,
   output: {
     path: '{{BUILD}}',
@@ -119,7 +131,17 @@ var prodConfig = {
 
   resolve: {
     extensions: ['.ts', '.js', '.json'],
-    modules: [path.resolve('node_modules')]
+    modules: [path.resolve('node_modules')],
+    alias: {
+      "@app": path.resolve('./src/app/'),
+      "@assets": path.resolve('./src/assets/'),
+      "@env": path.resolve(`./src/env/env.dev.ts`),
+      "@pages": path.resolve('./src/pages/'),
+      "@pipes": path.resolve('./src/pipes/'),
+      "@mock": path.resolve('./src/mock.ts'),
+      "@theme": path.resolve('./src/theme/'),
+      "@entities": path.resolve('./src/entities/'),
+    }
   },
 
   module: {
@@ -132,7 +154,7 @@ var prodConfig = {
     new ModuleConcatPlugin(),
     new PurifyPlugin(),
     new webpack.NormalModuleReplacementPlugin(/typeorm$/, function (result) {
-      result.request = result.request.replace(/typeorm/, "typeorm/browser");
+      result.request = result.request.replace(/typeorm/, 'typeorm/browser');
     })
   ],
 
@@ -144,7 +166,6 @@ var prodConfig = {
     tls: 'empty'
   }
 };
-
 
 module.exports = {
   dev: devConfig,

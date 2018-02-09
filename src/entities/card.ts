@@ -1,6 +1,6 @@
 import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
-import { Category } from './category';
+import { Category } from '@entities/category';
 
 @Entity('card')
 export class Card extends BaseEntity {

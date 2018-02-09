@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "author": "Michael Czechowski",
     "homepage": "https://dailysh.it/",
-    "description": "AI supported learning software",
+    "description": "AI supported learning software with digital flash cards",
     "private": true,
     "scripts": {
         "clean": "ionic-app-scripts clean",
@@ -13,10 +13,12 @@
         "ionic:serve": "ionic-app-scripts serve"
     },
     "config": {
+        "ionic_source_map_type": "source-map",
         "ionic_webpack": "./config/webpack.config.js"
     },
     "dependencies": {
         "@angular/animations": "^5.2.1",
+        "@angular/cli": "^1.6.8",
         "@angular/common": "5.0.3",
         "@angular/compiler": "5.0.3",
         "@angular/compiler-cli": "5.0.3",
@@ -60,7 +62,7 @@
     },
     "devDependencies": {
         "@ionic/app-scripts": "3.1.8",
-        "typescript": "2.4.2"
+        "typescript": "^2.7.1"
     },
     "cordova": {
         "plugins": {

@@ -1,12 +1,9 @@
+// Libraries
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, ToastController, ActionSheetController, Platform } from 'ionic-angular';
-import { File } from '@ionic-native/file';
-import { FileChooser } from '@ionic-native/file-chooser';
-import { FilePath } from '@ionic-native/file-path';
-
-import { Card } from './../../entities/card';
-import { Category } from './../../entities/category';
-import { DetailsPage } from './../details/details';
+import { NavController, NavParams, ToastController, Platform } from 'ionic-angular';
+// Entities
+import { Card } from '@entities/card';
+import { Category } from '@entities/category';
 
 @Component({
   selector: 'page-edit',
@@ -24,7 +21,6 @@ export class EditPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private toastCtrl: ToastController,
-    private alertCtrl: AlertController,
   ) {
     this.card = this.navParams.get('card');
     this.category = this.navParams.get('category');

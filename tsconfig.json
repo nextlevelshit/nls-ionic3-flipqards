@@ -12,7 +12,18 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "target": "es5",
-    "typeRoots": ["node_modules/@types"]
+    "typeRoots": ["node_modules/@types"],
+    "baseUrl": "./src",
+    "paths": {
+      "@app/*": [ "app/*" ],
+      "@assets/*": [ "assets/*" ],
+      "@env": [ "env" ],
+      "@pages/*": [ "pages/*" ],
+      "@pipes/*": [ "pipes/*" ],
+      "@mock": [ "mock" ],
+      "@theme/*": [ "theme/*" ],
+      "@entities/*": [ "entities/*" ]
+    }
   },
   "include": [
     "src/**/*.ts"

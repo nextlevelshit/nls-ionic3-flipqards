@@ -1,13 +1,13 @@
+// Libraries
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Observable } from 'rxjs/Rx';
+// Entities
+import { Card } from '@entities/card';
+import { Category } from '@entities/category';
+import { Settings } from '@entities/settings';
 
-import { Card } from './../../entities/card';
-import { Category } from './../../entities/category';
-import { Settings } from './../../entities/settings';
-
-@IonicPage()
 @Component({
   selector: 'page-learning',
   templateUrl: 'learning.html',
@@ -76,9 +76,6 @@ export class LearningPage {
       this.settings = res;
       this.cloneCard();
     });
-  }
-
-  ionViewDidLoad() {
   }
 
   public next(answer: boolean) {
