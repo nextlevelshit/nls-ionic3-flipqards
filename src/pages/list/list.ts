@@ -4,6 +4,7 @@ import { AlertController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
+import { ENV } from '@env';
 // Entities
 import { Category } from '@entities/category';
 import { Settings } from '@entities/settings';
@@ -19,6 +20,7 @@ export class ListPage {
   categories: Category[];
   count: number;
   settings: Settings|null = null;
+  env: Object = ENV;
 
   constructor(
     public navCtrl: NavController,

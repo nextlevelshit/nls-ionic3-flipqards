@@ -9,14 +9,14 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 // App
-import { MyApp } from './app.component';
+import { MyApp } from '@app/app.component';
 // Pages
 import { AddPage } from '@pages/add/add';
 import { DetailsPage } from '@pages/details/details';
 import { EditPage } from '@pages/edit/edit';
-import { HomePage } from '../pages/home/home';
+import { HomePage } from '@pages/home/home';
 import { LearningPage } from '@pages/learning/learning';
-import { ListPage } from '../pages/list/list';
+import { ListPage } from '@pages/list/list';
 // Pipes
 import { DatePipe } from '@pipes/date.pipe';
 import { FromNowPipe } from '@pipes/from-now.pipe';

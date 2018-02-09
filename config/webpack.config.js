@@ -15,8 +15,6 @@ const ModuleConcatPlugin = require('webpack/lib/optimize/ModuleConcatenationPlug
 const PurifyPlugin = require('@angular-devkit/build-optimizer').PurifyPlugin;
 const ENV = process.env.IONIC_ENV;
 
-// console.log(process.env.IONIC_WEBPACK_FACTORY);
-
 const optimizedProdLoaders = [
   {
     test: /\.json$/,
@@ -135,7 +133,7 @@ const prodConfig = {
     alias: {
       "@app": path.resolve('./src/app/'),
       "@assets": path.resolve('./src/assets/'),
-      "@env": path.resolve(`./src/env/env.dev.ts`),
+      "@env": path.resolve(`./src/env/env.ts`),
       "@pages": path.resolve('./src/pages/'),
       "@pipes": path.resolve('./src/pipes/'),
       "@mock": path.resolve('./src/mock.ts'),

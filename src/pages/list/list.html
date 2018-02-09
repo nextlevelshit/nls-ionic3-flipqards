@@ -82,8 +82,13 @@
     </ion-item>
     <ion-item>
       <ion-icon name="stats" item-start></ion-icon>
-      <ion-label>Statistik anzeigen</ion-label>
+      <ion-label>EntwicklerInnenmodus</ion-label>
       <ion-toggle color="primary" [(ngModel)]="settings.stats" (ngModelChange)="settings.save()"></ion-toggle>
+    </ion-item>
+    <ion-item *ngIf="settings.stats">
+      <small>
+        <pre>{{env|json}}</pre>
+      </small>
     </ion-item>
   </ion-list>
 </ion-content>
