@@ -21,20 +21,6 @@ export const ENV: EnvInterface = {
         Settings
       ]
     },
-    websql: {
-      type: 'websql',
-      database: 'nls-flipcards-dev',
-      version: '1',
-      description: 'development database',
-      size: 2 * 1024 * 1024,
-      entities: [
-        Card,
-        Category,
-        Settings
-      ],
-      logging: true,
-      synchronize: false
-    },
     sqljs: {
       type: 'sqljs',
       autoSave: true,
@@ -47,9 +33,6 @@ export const ENV: EnvInterface = {
         Category,
         Settings
       ]
-    },
-    sqlite: {
-
     }
   }
 }
