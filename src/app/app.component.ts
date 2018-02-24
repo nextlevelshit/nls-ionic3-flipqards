@@ -67,7 +67,24 @@ export class MyApp {
             });
         });
       } else {
-        await createConnection(ENV.connection.websql);
+        await createConnection(ENV.connection.sqljs).then(connection => {
+          console.log(connection);
+          // Settings.findOne()
+          //   .then(res => {
+          //     if(!res) {
+          //       new Settings().save()
+          //         .then(res => {
+          //           this.checkForCategories();
+          //         }).catch(err => {
+          //           console.error(err);
+          //         });
+          //     } else {
+          //       this.checkForCategories();
+          //     }
+          //   }).catch(err => {
+          //     console.log(err);
+          //   });
+        });
       }
     });
   }

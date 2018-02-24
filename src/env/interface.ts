@@ -3,6 +3,8 @@ export interface EnvInterface {
   isDebugMode: boolean,
   connection: {
     cordova,
-    websql
+    websql,
+    sqljs,
+    sqlite
   }
 }

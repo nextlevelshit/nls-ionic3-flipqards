@@ -13,8 +13,8 @@ export const ENV: EnvInterface = {
       location: 'default',
       database: 'nls-flipcards',
       logging: false,
-      synchronize: true,
-      dropSchema: true,
+      synchronize: false,
+      dropSchema: false,
       entities: [
         Card,
         Category,
@@ -27,13 +27,19 @@ export const ENV: EnvInterface = {
       description: 'Development Database for NLS Flipcards',
       version: '1',
       size: 2097152,
-      logging: true,
-      synchronize: true,
+      logging: false,
+      synchronize: false,
+      dropSchema: false,
       entities: [
         Category,
         Card
-      ],
-      dropSchema: true
+      ]
+    },
+    sqljs: {
+      type: 'sqljs'
+    },
+    sqlite: {
+
     }
   }
 };

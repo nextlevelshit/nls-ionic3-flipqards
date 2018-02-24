@@ -11,8 +11,8 @@ export const ENV: EnvInterface = {
     cordova: {
       type: 'cordova',
       location: 'default',
-      database: 'nls-flipcards',
-      logging: false,
+      database: 'nls-flipcards-dev',
+      logging: true,
       synchronize: true,
       dropSchema: true,
       entities: [
@@ -23,16 +23,33 @@ export const ENV: EnvInterface = {
     },
     websql: {
       type: 'websql',
-      database: 'nls-flipcards',
-      description: 'Development Database for NLS Flipcards',
+      database: 'nls-flipcards-dev',
       version: '1',
-      size: 2097152,
+      description: 'development database',
+      size: 2 * 1024 * 1024,
+      entities: [
+        Card,
+        Category,
+        Settings
+      ],
       logging: true,
+      synchronize: false
+    },
+    sqljs: {
+      type: 'sqljs',
+      autoSave: true,
+      location: 'browser',
+      dropSchema: true,
+      loggin: true,
       synchronize: true,
       entities: [
+        Card,
         Category,
-        Card
-      ],
-      dropSchema: true
+        Settings
+      ]
+    },
+    sqlite: {
+
     }
-};
+  }
+}
