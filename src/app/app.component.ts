@@ -11,8 +11,8 @@ import { Card } from '@entities/card';
 import { Category } from '@entities/category';
 import { MockCards, MockCategories } from '@mock';
 import { Settings } from '@entities/settings';
-import * as SQL from 'sql.js/js/sql.js';
-window.SQL = SQL;
+// import * as SQL from 'sql.js/js/sql.js';
+// window.SQL = SQL;
 
 @Component({
   templateUrl: 'app.html'
