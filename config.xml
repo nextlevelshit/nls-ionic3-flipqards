@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="it.dailysh.flipcards" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>nls-ionic3-flipcards</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+    <description>Sharable digital flashcards</description>
+    <author email="mail@dailysh.it" href="https://dailysh.it">Michael Czechowski</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -76,23 +76,6 @@
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
-    <allow-navigation href="http://10.190.7.211:8100" />
-    <allow-navigation href="http://192.168.178.49:8100" />
-    <allow-navigation href="http://192.168.0.151:8100" />
-    <allow-navigation href="http://141.58.59.153:8100" />
-    <allow-navigation href="http://192.168.43.13:8100" />
-    <allow-navigation href="http://192.168.2.151:8100" />
-    <allow-navigation href="http://141.58.51.177:8100" />
-    <allow-navigation href="http://141.58.44.193:8100" />
-    <allow-navigation href="http://192.168.3.152:8100" />
-    <allow-navigation href="http://141.58.35.149:8100" />
-    <allow-navigation href="http://141.58.42.214:8100" />
-    <allow-navigation href="http://141.58.48.69:8100" />
-    <allow-navigation href="http://141.58.33.3:8100" />
-    <allow-navigation href="http://192.168.0.150:8100" />
-    <allow-navigation href="http://141.58.35.7:8100" />
-    <allow-navigation href="http://141.58.57.26:8100" />
-    <allow-navigation href="http://192.168.2.152:8100" />
     <engine name="android" spec="^6.2.3" />
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
     <plugin name="cordova-plugin-file" spec="^4.3.3" />
@@ -104,5 +87,4 @@
     <plugin name="cordova-plugin-whitelist" spec="^1.3.1" />
     <plugin name="cordova-sqlite-storage" spec="^2.2.0" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
-    <allow-navigation href="http://141.58.37.113:8100" />
 </widget>

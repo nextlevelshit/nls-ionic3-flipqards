@@ -1,9 +1,9 @@
 {
-    "name": "nls-flipcards",
+    "name": "nls-ionic3-flipcards",
     "version": "0.0.1",
     "author": "Michael Czechowski",
     "homepage": "https://dailysh.it/",
-    "description": "AI supported learning software with digital flash cards",
+    "description": "Sharable digital flashcards",
     "private": true,
     "scripts": {
         "clean": "ionic-app-scripts clean",
