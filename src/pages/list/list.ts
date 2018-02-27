@@ -85,6 +85,55 @@ export class ListPage {
     }).present();
   }
 
+  public resetDatabase() {
+    this.confirmAction(
+      `Datenbank zurücksetzen?`,
+      `Soll die Datenbank wirklich unwiederbringlich gelöscht werden?`,
+      function() {
+        console.log('Going to reset db');
+      }
+    );
+  }
+
+  public loadDummyData() {
+    this.confirmAction(
+      `Mit Dummydaten überschreiben?`,
+      `Soll deine Datenbank wirklich mit Dummydaten überschrieben werden?`,
+      function() {
+        console.log('Loading dummy data');
+      }
+    );
+  }
+
+  public sendBugReport() {
+    this.confirmAction(
+      `Fehlerbericht senden?`,
+      `Sollen alle bisher aufgetretenen Fehler an die EntwicklerInnen der App gesendet werden?`,
+      function() {
+        console.log('Sending bug report');
+      }
+    );
+  }
+
+  public confirmAction(title, msg, fn) {
+    this.alertCtrl.create({
+      title: title,
+      message: msg,
+      buttons: [
+        {
+          text: 'Abbrechen',
+          role: 'cancel'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            fn();
+          }
+        }
+      ]
+    }).present();
+  }
+
   private getCategories() {
     Category.find().then(res => {
       this.categories = res;

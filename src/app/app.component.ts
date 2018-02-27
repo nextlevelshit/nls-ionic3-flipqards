@@ -55,12 +55,12 @@ export class MyApp {
               if(!res) {
                 new Settings().save()
                   .then(res => {
-                    this.checkForCategories();
+                    this.nav.setRoot(ListPage);
                   }).catch(err => {
                     console.error(err);
                   });
               } else {
-                this.checkForCategories();
+                this.nav.setRoot(ListPage);
               }
             }).catch(err => {
               console.log(err);
@@ -73,12 +73,12 @@ export class MyApp {
               if(!res) {
                 new Settings().save()
                   .then(res => {
-                    this.checkForCategories();
+                    this.nav.setRoot(ListPage);
                   }).catch(err => {
                     console.error(err);
                   });
               } else {
-                this.checkForCategories();
+                this.nav.setRoot(ListPage);
               }
             }).catch(err => {
               console.log(err);

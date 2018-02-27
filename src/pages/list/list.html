@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Lernkategorien</ion-title>
+    <ion-title>Übersicht</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="addCategory()">
         <ion-icon name="add"></ion-icon>
@@ -14,13 +14,12 @@
 
 <ion-content class="outer-content">
 
-  <ion-list *ngIf="categories?.length > 0" padding-top>
-    <!-- <ion-list-header>
-      Meine Kategorien
-    </ion-list-header> -->
+  <ion-list *ngIf="categories?.length > 0">
+    <ion-list-header>
+      Lernkategorien
+    </ion-list-header>
     <ion-item *ngFor="let category of categories">
-      <ion-badge item-start></ion-badge>
-      <ion-avatar item-start class="list-avatar">
+      <ion-avatar item-start class="list-avatar" (click)="categorySelected($event, category.id)">
         <div class="list-avatar-inner">
           {{category.cards?.length}}
         </div>
@@ -28,15 +27,15 @@
       <h2 (click)="categorySelected($event, category.id)">
         {{category.name}}
       </h2>
-      <p *ngIf="!category.lastSeen">Noch nicht wiederholt</p>
-      <p *ngIf="category.lastSeen">{{category.lastSeen | fromNow}}</p>
+      <p *ngIf="!category.lastSeen" (click)="categorySelected($event, category.id)">Noch nicht wiederholt</p>
+      <p *ngIf="category.lastSeen" (click)="categorySelected($event, category.id)">{{category.lastSeen | fromNow}}</p>
       <button ion-button outline item-end color="dark" (click)="editCategory($event, category)">Bearbeiten</button>
     </ion-item>
   </ion-list>
   <ion-list *ngIf="categories?.length === 0">
-    <!-- <ion-list-header>
-      Meine Kategorien
-    </ion-list-header> -->
+    <ion-list-header>
+      Lernkategorien
+    </ion-list-header>
     <ion-item>
       <p>
         Bisher wurden noch keine Kategorien hinzugefügt. Erstelle jetzt eine Kategorie: <a (click)="addCategory()">Kategorie erstellen</a>
@@ -66,29 +65,51 @@
       <button ion-button outline item-end (click)="console.log('adding suggested category');">Hinzufügen</button>
     </ion-item>
   </ion-list>
-  <ion-list padding-top *ngIf="settings">
-    <ion-list-header>
-      Konfiguration
-    </ion-list-header>
-    <ion-item>
-      <ion-icon name="school" item-start></ion-icon>
-      <ion-label>Algorythmisches Lernen</ion-label>
-      <ion-toggle color="primary" [(ngModel)]="settings.algorithmicLearning" (ngModelChange)="settings.save()"></ion-toggle>
-    </ion-item>
-    <ion-item *ngIf="false">
-      <ion-icon name="settings" item-start></ion-icon>
-      <ion-label>Automatisch synchronisieren</ion-label>
-      <ion-toggle color="primary" [(ngModel)]="settings.synchronize" (ngModelChange)="settings.save()"></ion-toggle>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="stats" item-start></ion-icon>
-      <ion-label>EntwicklerInnenmodus</ion-label>
-      <ion-toggle color="primary" [(ngModel)]="settings.stats" (ngModelChange)="settings.save()"></ion-toggle>
-    </ion-item>
-    <ion-item *ngIf="settings.stats">
-      <small>
-        <pre>{{env|json}}</pre>
-      </small>
-    </ion-item>
-  </ion-list>
+  <div *ngIf="settings">
+    <ion-list padding-top>
+      <ion-list-header>
+        Konfiguration
+      </ion-list-header>
+      <ion-item>
+        <ion-icon name="school" item-start></ion-icon>
+        <ion-label>Algorythmisches Lernen</ion-label>
+        <ion-toggle color="primary" [(ngModel)]="settings.algorithmicLearning" (ngModelChange)="settings.save()"></ion-toggle>
+      </ion-item>
+      <ion-item *ngIf="false">
+        <ion-icon name="settings" item-start></ion-icon>
+        <ion-label>Automatisch synchronisieren</ion-label>
+        <ion-toggle color="primary" [(ngModel)]="settings.synchronize" (ngModelChange)="settings.save()"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="stats" item-start></ion-icon>
+        <ion-label>EntwicklerInnenmodus</ion-label>
+        <ion-toggle color="primary" [(ngModel)]="settings.stats" (ngModelChange)="settings.save()"></ion-toggle>
+      </ion-item>
+    </ion-list>
+    <div *ngIf="settings?.stats">
+      <ion-list padding-top>
+        <ion-list-header>
+          EntwicklerInnenoptionen
+        </ion-list-header>
+        <ion-item (click)="resetDatabase()">
+          Datenbank zurücksetzen
+        </ion-item>
+        <ion-item (click)="loadDummyData()">
+          Dummydaten laden
+        </ion-item>
+        <ion-item (click)="sendBugReport()">
+          Fehlerbericht senden
+        </ion-item>
+      </ion-list>
+
+      <ion-list padding-top>
+        <ion-list-header>
+          Datenbankconfiguration
+        </ion-list-header>
+        <ion-item>
+          <pre>{{env|json}}</pre>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
 </ion-content>
