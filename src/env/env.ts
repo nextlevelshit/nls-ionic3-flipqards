@@ -25,9 +25,9 @@ export const ENV: EnvInterface = {
       type: 'sqljs',
       autoSave: true,
       location: 'browser',
-      dropSchema: false,
+      dropSchema: true,
       logging: true,
-      synchronize: false,
+      synchronize: true,
       entities: [
         Card,
         Category,

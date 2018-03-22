@@ -4,16 +4,15 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
   <div class="learning" *ngIf="clone">
     <div class="learning-card">
       <div class="learning-card-item" [ngClass]="{'--flipped': flipped}" [@card]="cardState" (click)="flipped=!flipped" *ngIf="clone">
         <div class="learning-card-item-front"
-          [ngClass]="{'--smallest': clone.front.length > 150, '--smaller': clone.front.length > 100, '--small': clone.front.length > 40}"
+          [ngClass]="{'--smallestest': clone.front.length > 220, '--smallest': clone.front.length > 150, '--smaller': clone.front.length > 100, '--small': clone.front.length > 40}"
           [innerHTML]="clone.front | markdown"></div>
         <div class="learning-card-item-back"
-          [ngClass]="{'--smallest': clone.back.length > 150, '--smaller': clone.back.length > 100, '--small': clone.back.length > 40}"
+          [ngClass]="{'--smallestest': clone.back.length > 220, '--smallest': clone.back.length > 150, '--smaller': clone.back.length > 100, '--small': clone.back.length > 40}"
           [innerHTML]="clone.back | markdown"></div>
       </div>
     </div>
@@ -27,16 +26,16 @@
         <ion-label>Richtig</ion-label>
       </button>
     </div>
-    <ion-grid class="learning-stats" *ngIf="settings">
+    <!-- <ion-grid class="learning-stats" *ngIf="settings?.stats">
       <ion-row *ngIf="settings.stats">
         <ion-col>
           <pre>{{stats|json}}</pre>
         </ion-col>
       </ion-row>
-    </ion-grid>
+    </ion-grid> -->
   </div>
-  <ion-title *ngIf="sessionEnd">
+  <!-- <ion-title *ngIf="sessionEnd">
     <h3>Du hast es geschafft</h3>
     <p>{{run.correct}} von {{run.total}} richtig</p>
-  </ion-title>
+  </ion-title> -->
 </ion-content>

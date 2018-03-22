@@ -70,18 +70,16 @@ export class MyApp {
         await createConnection(ENV.connection.sqljs).then(connection => {
           Settings.findOne()
             .then(res => {
-              if(!res) {
-                new Settings().save()
-                  .then(res => {
-                    this.nav.setRoot(ListPage);
-                  }).catch(err => {
-                    console.error(err);
-                  });
-              } else {
-                this.nav.setRoot(ListPage);
-              }
+              console.log('existing settings', res);
+              this.nav.setRoot(ListPage);
             }).catch(err => {
-              console.log(err);
+              new Settings().save()
+                .then(res => {
+                  console.log('new settings', res);
+                  this.nav.setRoot(ListPage);
+                }).catch(err => {
+                  console.error(err);
+                });
             });
         });
       }
